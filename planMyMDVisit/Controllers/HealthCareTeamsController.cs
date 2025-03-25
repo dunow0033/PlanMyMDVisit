@@ -9,7 +9,14 @@ namespace planMyMDVisit.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult SelectSpecialty()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SelectSpecialty()
         {
             return View();
         }
