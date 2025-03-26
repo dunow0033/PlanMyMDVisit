@@ -16,7 +16,7 @@ namespace planMyMDVisit.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SelectSpecialty()
+        public async Task<IActionResult> SelectSpecialty(int x)
         {
             return View();
         }

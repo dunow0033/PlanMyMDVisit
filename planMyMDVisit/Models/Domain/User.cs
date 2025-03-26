@@ -1,10 +1,19 @@
-﻿namespace planMyMDVisit.Models.Domain
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace planMyMDVisit.Models.Domain
 {
-    public class User
+    public class User : IdentityUser<Guid>
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public Patient Patient { get; set; }
+
+        public Doctor Doctor {  get; set; }
+        //public ICollection<Patient> Patients { get; set; } = new List<Patient>();
         public string FullName()
         {
-            return this.FirstName() + " " + this.LastName();
+            return $"{FirstName} {LastName}";
         }
     }
 }
