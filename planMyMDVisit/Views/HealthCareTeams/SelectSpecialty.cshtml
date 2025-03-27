@@ -1,9 +1,22 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using planMyMDVisit.Models.Domain
+@model string
 
-<!--<form asp-action="SelectSpecialty" method="post">
-    <select asp-for="" asp-items="" />
-</form>-->
+@* <form asp-action="SelectSpecialty" method="post">
+    <select asp-for="@Model" asp-items="ViewBag.SpecialtyList" class="form-control">
+        <option>Select Specialty</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Sumit</button>
+</form> *@
+
+<form asp-action="SelectSpecialty" method="post">
+    <label class="control-label">Department</label>
+    <select class="form-control" name="Department" id="Department">
+        <option>-- SELECT --</option>
+        @foreach(var item in ViewBag.SpecialtyList)
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

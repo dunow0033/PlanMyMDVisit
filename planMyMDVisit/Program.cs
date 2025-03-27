@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using planMyMDVisit.Data;
 using planMyMDVisit.Models.Domain;
+using planMyMDVisit.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 })
     .AddEntityFrameworkStores<PlanMyMDVisitContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 
 var app = builder.Build();
 

@@ -22,11 +22,90 @@ namespace planMyMDVisit.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Doctor>()
-            //    .HasOne(d => d.User)
-            //    .WithMany(u => u.HealthCareTeam)
-            //    .HasForeignKey(ml => ml.UserId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            var User1Id = Guid.NewGuid();
+            var User2Id = Guid.NewGuid();
+            var User3Id = Guid.NewGuid();
+            var User4Id = Guid.NewGuid();
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = User1Id,
+                    FirstName = "Danny",
+                    LastName = "Tonner",
+                    Email = "dannyt@hotmail.com",
+                    UserName = "dannyt"
+                });
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = User2Id,
+                    FirstName = "Vanessa",
+                    LastName = "Reagan",
+                    Email = "vanessar@hotmail.com",
+                    UserName = "vanessar"
+                });
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = User3Id,
+                    FirstName = "Mike",
+                    LastName = "Johnson",
+                    Email = "mikej@hotmail.com",
+                    UserName = "mikej"
+                });
+
+            modelBuilder.Entity<User>().HasData(
+               new User
+               {
+                   Id = User4Id,
+                   FirstName = "Helen",
+                   LastName = "Skyburgh",
+                   Email = "helens@hotmail.com",
+                   UserName = "helens"
+               });
+
+
+
+
+
+            modelBuilder.Entity<Doctor>().HasData(
+                new Doctor
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Dr. Smith",
+                    Specialty = "Allergy",
+                    UserId = User1Id
+                });
+
+            modelBuilder.Entity<Doctor>().HasData(
+                new Doctor
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Dr. Taylor",
+                    Specialty = "Cardiac Surgery",
+                    UserId = User2Id
+                });
+
+            modelBuilder.Entity<Doctor>().HasData(
+                new Doctor
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Dr. White",
+                    Specialty = "Chiropractic",
+                    UserId = User3Id
+                });
+
+            modelBuilder.Entity<Doctor>().HasData(
+                new Doctor
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Dr. Jordan",
+                    Specialty = "Dermatology",
+                    UserId = User4Id
+                });
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Doctor)
