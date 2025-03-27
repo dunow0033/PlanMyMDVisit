@@ -1,6 +1,6 @@
-﻿@model planMyMDVisit.Models.Domain.Patient
+﻿@*@model planMyMDVisit.Models.Domain.Patient
 
-<h4>Welcome, @Model.FullName</h4>
+<h4>Welcome, @Model.FullName</h4>*@
 
 <div class="col s12 m7">
     <div class="card horizontal">
@@ -13,4 +13,4 @@
 
 <p><strong>plan my MD visit</strong> is not for use in emergencies or for messages that require immediate attention. For medical or psychiatric emergencies, call 911 or go to the nearest hospital.</p>
 
-<a asp-action="SelectSpecialty" asp-controller="HealthCareTeams" class="waves-effect waves-light btn">Schedule an Appointment</a>
+<a asp-action="SelectSpecialty" asp-controller="HealthCareTeams" class="waves-effect waves-light btn btn-primary">Schedule an Appointment</a>

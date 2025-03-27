@@ -7,7 +7,7 @@ namespace planMyMDVisit.Data
 {
     public class PlanMyMDVisitContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
-        public PlanMyMDVisitContext(DbContextOptions options) : base(options)
+        public PlanMyMDVisitContext(DbContextOptions<PlanMyMDVisitContext> options) : base(options)
         { }
 
         public DbSet<Doctor> Doctors { get; set; }
@@ -20,11 +20,37 @@ namespace planMyMDVisit.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             //modelBuilder.Entity<Doctor>()
             //    .HasOne(d => d.User)
             //    .WithMany(u => u.HealthCareTeam)
             //    .HasForeignKey(ml => ml.UserId)
             //    .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Doctor)
+                .WithOne(d => d.User)
+                .HasForeignKey<Doctor>(d => d.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Patient)
+                .WithOne(d => d.User)
+                .HasForeignKey<Patient>(p => p.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<HealthCareTeam>()
+                .HasOne(u => u.Doctor)
+                .WithMany(d => d.HealthCareTeams)
+                .HasForeignKey(p => p.DoctorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<HealthCareTeam>()
+                .HasOne(ht => ht.Patient)
+                .WithMany(p => p.HealthCareTeams)
+                .HasForeignKey(ht => ht.PatientId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

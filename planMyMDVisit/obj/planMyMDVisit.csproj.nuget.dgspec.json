@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\planMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj": {}
+    "C:\\Users\\bedon\\source\\repos\\PlanMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\planMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj": {
+    "C:\\Users\\bedon\\source\\repos\\PlanMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\planMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj",
+        "projectUniqueName": "C:\\Users\\bedon\\source\\repos\\PlanMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj",
         "projectName": "planMyMDVisit",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\planMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\planMyMDVisit\\planMyMDVisit\\obj\\",
+        "projectPath": "C:\\Users\\bedon\\source\\repos\\PlanMyMDVisit\\planMyMDVisit\\planMyMDVisit.csproj",
+        "packagesPath": "C:\\Users\\bedon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bedon\\source\\repos\\PlanMyMDVisit\\planMyMDVisit\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bedon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,21 +55,21 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.10, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.10, )"
+              "version": "[8.0.4, )"
             }
           },
           "imports": [
@@ -87,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
