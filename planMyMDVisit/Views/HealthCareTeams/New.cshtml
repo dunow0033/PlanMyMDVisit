@@ -1,0 +1,35 @@
+﻿@model planMyMDVisit.Models.Domain.DatepickerModel;
+
+<form asp-controller="HealthCareTeams" asp-action="ScheduleAppt" method="post">
+    <label class="control-label">Available In-Network Doctors</label>
+
+    <select class="form-control" name="SpecialDoctor" id="SpecialDoctor">
+        <option selected disabled>-- SELECT DOCTOR--</option>
+        @* @foreach (var item in ViewBag.SpecialtyList)
+        {
+            <option value="@item.Value">@item.Text</option>
+        } *@
+    </select>
+    <br />
+    <label class="control-label">Date and Time</label>
+
+    @*@using(Html.BeginForm())
+    {*@
+        <br />
+        @Html.EditorFor(model => model.Date, new {htmlAttributes = new { @class="datepicker"}})
+    @*}*@
+    <br />
+    <button type="submit" class="btn btn-primary">Schedule This Appointment</button>
+</form>
+
+
+
+
+
+
+ @* <input type="date"
+           id="start"
+           name="trip-start"
+           value="2018-07-22"
+           min="2018-01-01"
+           max="2018-12-31" /> *@

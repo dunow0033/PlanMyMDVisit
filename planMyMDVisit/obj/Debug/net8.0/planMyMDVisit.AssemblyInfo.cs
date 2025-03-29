@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("planMyMDVisit")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0ae29476e4f1532d6d4f345d9d531ad91b8f8fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6df83719af9bc6757c7339e41fb646a1262ffc6")]
 [assembly: System.Reflection.AssemblyProductAttribute("planMyMDVisit")]
 [assembly: System.Reflection.AssemblyTitleAttribute("planMyMDVisit")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

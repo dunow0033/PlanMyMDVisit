@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using planMyMDVisit.Models.Domain;
+using planMyMDVisit.Models.ViewModels;
 using planMyMDVisit.Repositories;
 
 namespace planMyMDVisit.Controllers
@@ -28,7 +30,21 @@ namespace planMyMDVisit.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SelectSpecialty(int x)
+        public IActionResult NewAppt(CreateHealthCareTeam createHealthCareTeam)
+        {
+            return RedirectToAction("New");
+        }
+
+        [HttpGet]
+        [ActionName("New")]
+        public IActionResult New()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ScheduleAppt")]
+        public IActionResult ScheduleAppt()
         {
             return View();
         }

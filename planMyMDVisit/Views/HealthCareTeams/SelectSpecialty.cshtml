@@ -8,15 +8,15 @@
     <button type="submit" class="btn btn-primary">Sumit</button>
 </form> *@
 
-<form asp-action="SelectSpecialty" method="post">
-    <label class="control-label">Department</label>
+<form asp-controller="HealthCareTeams" asp-action="NewAppt" method="post">
+    <label class="control-label">Specialty</label>
     <select class="form-control" name="Department" id="Department">
-        <option>-- SELECT --</option>
+        <option selected disabled>-- SELECT --</option>
         @foreach(var item in ViewBag.SpecialtyList)
         {
             <option value="@item.Value">@item.Text</option>
         }
     </select>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Next</button>
 </form>
 
