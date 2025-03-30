@@ -6,6 +6,8 @@
         public Guid PatientId { get; set; }
         public Guid DoctorId { get; set; }
 
+        public DateTime Appointment { get; set; }
+
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
     }
