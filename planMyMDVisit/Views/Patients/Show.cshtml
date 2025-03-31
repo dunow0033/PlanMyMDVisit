@@ -1,6 +1,12 @@
 ﻿@using planMyMDVisit.Utilities
 @model planMyMDVisit.Models.Domain.Patient
 
+@*<link rel="stylesheet" href="https://cdn.jsdeliver.net/npm/fullcalendar@6.1.15/main.min.css">*@
+@*<script src="https://cdn.jsdeliver.net/npm/fullcalendar@5.1.0/main.min.js"></script>*@
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/core@6.1.15/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/list@6.1.15/index.global.min.js"></script>
+
 @*<h4>Welcome, @Model.FullName</h4>*@
 
 <div class="col s12 m7">
@@ -39,4 +45,8 @@
         } *@
 
     </div>
+
+    <div id="calendar"></div>
 </div>
+
+<script type="module" src="~/dist/Calendar.js"></script>
