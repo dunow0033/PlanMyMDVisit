@@ -1,5 +1,6 @@
 ﻿@using planMyMDVisit.Models.Domain
-@model string
+@model planMyMDVisit.Models.ViewModels.CreateApptRequest
+@*@model planMyMDVisit.Models.ViewModels.SelectItemViewModel*@
 
 @* <form asp-action="SelectSpecialty" method="post">
     <select asp-for="@Model" asp-items="ViewBag.SpecialtyList" class="form-control">
@@ -8,15 +9,20 @@
     <button type="submit" class="btn btn-primary">Sumit</button>
 </form> *@
 
+<label class="control-label">Specialty</label>
+
 <form asp-controller="HealthCareTeams" asp-action="NewAppt" method="post">
-    <label class="control-label">Specialty</label>
-    <select class="form-control" name="Department" id="Department">
+    <select asp-for="Specialty" asp-items="Model.SpecialtySelectList" aspclass="form-control">
         <option selected disabled>-- SELECT --</option>
-        @foreach(var item in ViewBag.SpecialtyList)
-        {
-            <option value="@item.Value">@item.Text</option>
-        }
     </select>
+
+    <span asp-validation-for="Specialty" class="text-danger"></span>
+
     <button type="submit" class="btn btn-primary">Next</button>
 </form>
 
+
+@* @foreach(var item in ViewBag.SpecialtyList)
+        {
+            <option value="@item.Value">@item.Text</option>
+        }*@

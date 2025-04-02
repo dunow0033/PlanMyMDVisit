@@ -1,6 +1,25 @@
 ﻿@using planMyMDVisit.Utilities
 @model planMyMDVisit.Models.Domain.Patient
 
+<style>
+    #calendar-container {
+        width: 80%;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -30px;
+    }
+
+    #calendar {
+        height: 100%;
+        width: 100%;
+    }
+
+    a.btn {
+        margin-bottom: 5px;
+    }
+</style>
+
 @*<link rel="stylesheet" href="https://cdn.jsdeliver.net/npm/fullcalendar@6.1.15/main.min.css">*@
 @*<script src="https://cdn.jsdeliver.net/npm/fullcalendar@5.1.0/main.min.js"></script>*@
 
@@ -20,12 +39,12 @@
 
 <p><strong>plan my MD visit</strong> is not for use in emergencies or for messages that require immediate attention. For medical or psychiatric emergencies, call 911 or go to the nearest hospital.</p>
 
-<a asp-action="SelectSpecialty" asp-controller="HealthCareTeams" class="waves-effect waves-light btn btn-primary">Schedule an Appointment</a>
+<a asp-action="NewAppt" asp-controller="HealthCareTeams" class="waves-effect waves-light btn btn-primary" style="width: 200px;">Schedule an Appointment</a>
 
 <br />
 <br />
 
-<a asp-action="Index" asp-controller="HealthCareTeams" class="waves-effect waves-light btn btn-primary">View All</a>
+<a asp-action="Index" asp-controller="HealthCareTeams" class="waves-effect waves-light btn btn-primary" style="width: 200px;">View All</a>
 
 <div class="row">
     <div class="col s12 m4 l4">
@@ -44,9 +63,11 @@
             </div>
         } *@
 
-    </div>
+        </div>
 
-    <div id="calendar"></div>
-</div>
+    <div id="calendar-container">
+        <div id="calendar"></div>
+    </div>
+ </div>
 
 <script type="module" src="~/dist/Calendar.js"></script>

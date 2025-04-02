@@ -12,8 +12,8 @@ using planMyMDVisit.Data;
 namespace planMyMDVisit.Migrations
 {
     [DbContext(typeof(PlanMyMDVisitContext))]
-    [Migration("20250327003924_setting up models and relationships")]
-    partial class settingupmodelsandrelationships
+    [Migration("20250402163052_putting in some initial feeder data")]
+    partial class puttinginsomeinitialfeederdata
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,10 +190,53 @@ namespace planMyMDVisit.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Doctors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c6d1649e-a8cd-452d-89e0-265bb93d8ef9"),
+                            Name = "Dr. Smith",
+                            Specialty = "Allergy",
+                            UserId = new Guid("0bcc5e8f-f89e-43d1-a9b1-f7fccdc6d503")
+                        },
+                        new
+                        {
+                            Id = new Guid("79ab3bfa-f416-4ea4-a424-d2428eba9f74"),
+                            Name = "Dr. Taylor",
+                            Specialty = "Cardiac Surgery",
+                            UserId = new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307")
+                        },
+                        new
+                        {
+                            Id = new Guid("399e2a55-14b4-41f5-8585-b34b8dcee1e2"),
+                            Name = "Dr. Rogers",
+                            Specialty = "Dermatology",
+                            UserId = new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307")
+                        },
+                        new
+                        {
+                            Id = new Guid("47bdb48a-a395-416f-bea6-2aa5826e7200"),
+                            Name = "Dr. Banks",
+                            Specialty = "Dermatology",
+                            UserId = new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307")
+                        },
+                        new
+                        {
+                            Id = new Guid("17e196a2-0cd4-4b38-996f-6da74c82ab2a"),
+                            Name = "Dr. White",
+                            Specialty = "Chiropractic",
+                            UserId = new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307")
+                        },
+                        new
+                        {
+                            Id = new Guid("1df39d64-e39d-4c76-8020-af1b24285f2f"),
+                            Name = "Dr. Jordan",
+                            Specialty = "Dermatology",
+                            UserId = new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307")
+                        });
                 });
 
             modelBuilder.Entity("planMyMDVisit.Models.Domain.HealthCareTeam", b =>
@@ -202,11 +245,17 @@ namespace planMyMDVisit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("Appointment")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PatientId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Specialty")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -306,6 +355,64 @@ namespace planMyMDVisit.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0bcc5e8f-f89e-43d1-a9b1-f7fccdc6d503"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "76dbef77-188d-455a-b834-89af40da45d0",
+                            Email = "dannyt@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Danny",
+                            LastName = "Tonner",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "dannyt"
+                        },
+                        new
+                        {
+                            Id = new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "95c38583-1381-495f-943e-4500c996fe89",
+                            Email = "vanessar@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Vanessa",
+                            LastName = "Reagan",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "vanessar"
+                        },
+                        new
+                        {
+                            Id = new Guid("358d82da-1b56-466b-b42c-57377fe27ca5"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bcb306e0-224a-480b-8cc3-0760ffff4c4f",
+                            Email = "mikej@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Mike",
+                            LastName = "Johnson",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "mikej"
+                        },
+                        new
+                        {
+                            Id = new Guid("210024db-8eac-4584-a68d-29e1e3e0c75e"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f3f7a866-9f15-4fff-beef-e83d90e86854",
+                            Email = "helens@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Helen",
+                            LastName = "Skyburgh",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "helens"
+                        });
                 });
 
             modelBuilder.Entity("DoctorPatient", b =>
@@ -319,7 +426,7 @@ namespace planMyMDVisit.Migrations
                     b.HasOne("planMyMDVisit.Models.Domain.Patient", null)
                         .WithMany()
                         .HasForeignKey("PatientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -377,8 +484,8 @@ namespace planMyMDVisit.Migrations
             modelBuilder.Entity("planMyMDVisit.Models.Domain.Doctor", b =>
                 {
                     b.HasOne("planMyMDVisit.Models.Domain.User", "User")
-                        .WithOne("Doctor")
-                        .HasForeignKey("planMyMDVisit.Models.Domain.Doctor", "UserId")
+                        .WithMany("Doctors")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -427,11 +534,9 @@ namespace planMyMDVisit.Migrations
 
             modelBuilder.Entity("planMyMDVisit.Models.Domain.User", b =>
                 {
-                    b.Navigation("Doctor")
-                        .IsRequired();
+                    b.Navigation("Doctors");
 
-                    b.Navigation("Patient")
-                        .IsRequired();
+                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }

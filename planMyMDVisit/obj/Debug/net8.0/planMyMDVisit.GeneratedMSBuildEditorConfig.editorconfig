@@ -18,20 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Admin\source\repos\planMyMDVisit\planMyMDVisit
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/ConfirmAppt.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXENvbmZpcm1BcHB0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/New.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXE5ldy5jc2h0bWw=
+[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/NewAppt.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXE5ld0FwcHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/ScheduleAppt.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXFNjaGVkdWxlQXBwdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/SelectSpecialty.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXFNlbGVjdFNwZWNpYWx0eS5jc2h0bWw=
+[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/NewDrAndTime.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXE5ld0RyQW5kVGltZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Home/Index.cshtml]

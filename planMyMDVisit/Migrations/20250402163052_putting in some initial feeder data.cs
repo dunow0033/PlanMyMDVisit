@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace planMyMDVisit.Migrations
 {
     /// <inheritdoc />
-    public partial class settingupmodelsandrelationships : Migration
+    public partial class puttinginsomeinitialfeederdata : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -214,8 +216,7 @@ namespace planMyMDVisit.Migrations
                         name: "FK_DoctorPatient_Patients_PatientsId",
                         column: x => x.PatientsId,
                         principalTable: "Patients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -224,7 +225,9 @@ namespace planMyMDVisit.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Specialty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Appointment = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -239,6 +242,30 @@ namespace planMyMDVisit.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { new Guid("0bcc5e8f-f89e-43d1-a9b1-f7fccdc6d503"), 0, "76dbef77-188d-455a-b834-89af40da45d0", "dannyt@hotmail.com", false, "Danny", "Tonner", false, null, null, null, null, null, false, null, false, "dannyt" },
+                    { new Guid("210024db-8eac-4584-a68d-29e1e3e0c75e"), 0, "f3f7a866-9f15-4fff-beef-e83d90e86854", "helens@hotmail.com", false, "Helen", "Skyburgh", false, null, null, null, null, null, false, null, false, "helens" },
+                    { new Guid("358d82da-1b56-466b-b42c-57377fe27ca5"), 0, "bcb306e0-224a-480b-8cc3-0760ffff4c4f", "mikej@hotmail.com", false, "Mike", "Johnson", false, null, null, null, null, null, false, null, false, "mikej" },
+                    { new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307"), 0, "95c38583-1381-495f-943e-4500c996fe89", "vanessar@hotmail.com", false, "Vanessa", "Reagan", false, null, null, null, null, null, false, null, false, "vanessar" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Doctors",
+                columns: new[] { "Id", "Name", "Specialty", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("17e196a2-0cd4-4b38-996f-6da74c82ab2a"), "Dr. White", "Chiropractic", new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307") },
+                    { new Guid("1df39d64-e39d-4c76-8020-af1b24285f2f"), "Dr. Jordan", "Dermatology", new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307") },
+                    { new Guid("399e2a55-14b4-41f5-8585-b34b8dcee1e2"), "Dr. Rogers", "Dermatology", new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307") },
+                    { new Guid("47bdb48a-a395-416f-bea6-2aa5826e7200"), "Dr. Banks", "Dermatology", new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307") },
+                    { new Guid("79ab3bfa-f416-4ea4-a424-d2428eba9f74"), "Dr. Taylor", "Cardiac Surgery", new Guid("79d19819-9abd-4aa5-b3fd-20e4d59ed307") },
+                    { new Guid("c6d1649e-a8cd-452d-89e0-265bb93d8ef9"), "Dr. Smith", "Allergy", new Guid("0bcc5e8f-f89e-43d1-a9b1-f7fccdc6d503") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -288,8 +315,7 @@ namespace planMyMDVisit.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Doctors_UserId",
                 table: "Doctors",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HealthCareTeams_DoctorId",

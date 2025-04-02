@@ -4,6 +4,8 @@ namespace planMyMDVisit.Repositories
 {
     public interface IDoctorRepository
     {
-        Task<List<String>> GetSpecialties();
+        Task<List<string>> GetSpecialties();
+
+        Task<List<Doctor>> GetDoctorsBySpecialty(string specialty);
     }
 }

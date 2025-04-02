@@ -1,14 +1,14 @@
-﻿@model planMyMDVisit.Models.Domain.DatepickerModel;
+﻿@model planMyMDVisit.Models.ViewModels.CreateApptRequest
 
-<form asp-controller="HealthCareTeams" asp-action="ScheduleAppt" method="post">
+<form asp-controller="HealthCareTeams" asp-action="ConfirmAppt" method="post">
     <label class="control-label">Available In-Network Doctors</label>
 
-    <select class="form-control" name="SpecialDoctor" id="SpecialDoctor">
+    <select class="form-control" asp-for="DoctorName">
         <option selected disabled>-- SELECT DOCTOR--</option>
-        @* @foreach (var item in ViewBag.SpecialtyList)
+        @foreach (var item in ViewBag.DoctorList)
         {
             <option value="@item.Value">@item.Text</option>
-        } *@
+        }
     </select>
     <br />
     <label class="control-label">Date and Time</label>
@@ -16,9 +16,12 @@
     @*@using(Html.BeginForm())
     {*@
         <br />
-        @Html.EditorFor(model => model.Date, new {htmlAttributes = new { @class="datepicker"}})
+        @Html.EditorFor(model => model.Appointment, new {htmlAttributes = new { @class="datepicker"}})
     @*}*@
     <br />
+
+    <span asp-validation-for="Appointment" class="text-danger"></span>
+    
     <button type="submit" class="btn btn-primary">Schedule This Appointment</button>
 </form>
 

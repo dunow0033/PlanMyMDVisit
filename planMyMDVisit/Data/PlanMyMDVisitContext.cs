@@ -26,6 +26,36 @@ namespace planMyMDVisit.Data
             var User2Id = Guid.NewGuid();
             var User3Id = Guid.NewGuid();
             var User4Id = Guid.NewGuid();
+            var User5Id = Guid.NewGuid();
+            var User6Id = Guid.NewGuid();
+
+            modelBuilder.Entity<Doctor>()
+                .HasMany(d => d.Patients)
+                .WithMany(p => p.Doctors)
+                .UsingEntity<Dictionary<string, object>>(
+                    "DoctorPatient", j => j
+                .HasOne<Patient>()
+                .WithMany()
+                .HasForeignKey("PatientsId")
+                .OnDelete(DeleteBehavior.NoAction), j => j
+                .HasOne<Doctor>()
+                .WithMany()
+                .HasForeignKey("DoctorsId")
+                .OnDelete(DeleteBehavior.Cascade) // Only allow cascade delete on one side
+                );
+
+
+            modelBuilder.Entity<HealthCareTeam>()
+                .HasOne(ht => ht.Doctor)
+                .WithMany(d => d.HealthCareTeams)
+                .HasForeignKey(ht => ht.DoctorId)
+                .OnDelete(DeleteBehavior.Cascade); // Keep cascade delete on Doctor
+
+            modelBuilder.Entity<HealthCareTeam>()
+                .HasOne(ht => ht.Patient)
+                .WithMany(p => p.HealthCareTeams)
+                .HasForeignKey(ht => ht.PatientId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -68,9 +98,6 @@ namespace planMyMDVisit.Data
                });
 
 
-
-
-
             modelBuilder.Entity<Doctor>().HasData(
                 new Doctor
                 {
@@ -89,13 +116,32 @@ namespace planMyMDVisit.Data
                     UserId = User2Id
                 });
 
+
+            modelBuilder.Entity<Doctor>().HasData(
+                new Doctor
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Dr. Rogers",
+                    Specialty = "Dermatology",
+                    UserId = User2Id
+                });
+
+            modelBuilder.Entity<Doctor>().HasData(
+                new Doctor
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Dr. Banks",
+                    Specialty = "Dermatology",
+                    UserId = User2Id
+                });
+
             modelBuilder.Entity<Doctor>().HasData(
                 new Doctor
                 {
                     Id = Guid.NewGuid(),
                     Name = "Dr. White",
                     Specialty = "Chiropractic",
-                    UserId = User3Id
+                    UserId = User2Id
                 });
 
             modelBuilder.Entity<Doctor>().HasData(
@@ -104,13 +150,13 @@ namespace planMyMDVisit.Data
                     Id = Guid.NewGuid(),
                     Name = "Dr. Jordan",
                     Specialty = "Dermatology",
-                    UserId = User4Id
+                    UserId = User2Id
                 });
 
             modelBuilder.Entity<User>()
-                .HasOne(u => u.Doctor)
+                .HasMany(u => u.Doctors)
                 .WithOne(d => d.User)
-                .HasForeignKey<Doctor>(d => d.UserId)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<User>()

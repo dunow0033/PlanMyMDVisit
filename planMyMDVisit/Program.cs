@@ -26,6 +26,7 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IHealthCareTeamRepository, HealthCareTeamRepository>();
 
 var app = builder.Build();
 

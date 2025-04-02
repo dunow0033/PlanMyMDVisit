@@ -19,6 +19,12 @@ namespace planMyMDVisit.Repositories
                 .Select(d => d.Specialty).ToListAsync();
         }
 
+        public async Task<List<Doctor>> GetDoctorsBySpecialty(string specialty)
+        {
+            return await planMyMDVisitDBContext.Doctors
+                .Where(s => s.Specialty == specialty).ToListAsync();
+        }
+
         //public async Task<Doctor?> GetByIdAsync(Guid id)
         //{
         //    return await planMyMDVisitDBContext.Doctors

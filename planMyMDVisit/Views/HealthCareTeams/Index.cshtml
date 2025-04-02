@@ -1,1 +1,24 @@
-﻿<h4>My Care Team</h4>
+﻿@using planMyMDVisit.Utilities;
+
+<h4>My Care Team</h4>
+
+<div class="row">
+    <div class="col col-sm-12 card-container">
+        @*@foreach (var hct in Helpers.TwoLatestCareTeams(Model))*@
+        @for (var i = 0; i < 3; i++)
+        {
+            <div class="card blue lighten-5">
+                <div class="card-content black-text">
+                    @*<span class="card-title truncate">@hct.Doctor.Specialty</span>*@
+                    <span class="card-title truncate">Doctor Specialty</span>
+                    @*<p class="truncate"><%= date_time(healthcare_team.appointment) %></p>*@
+                    <p class="truncate">Date</p>
+                </div>
+                <div class="card-action">
+                    @*@hct.Doctor.Name*@
+                    Doctor Name
+                </div>
+            </div>
+        }
+    </div>
+</div>
