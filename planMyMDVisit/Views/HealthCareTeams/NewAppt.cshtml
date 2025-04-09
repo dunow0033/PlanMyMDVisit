@@ -1,4 +1,4 @@
-﻿@using planMyMDVisit.Models.Domain
+﻿@*@using planMyMDVisit.Models.Domain*@
 @model planMyMDVisit.Models.ViewModels.CreateApptRequest
 @*@model planMyMDVisit.Models.ViewModels.SelectItemViewModel*@
 
@@ -12,8 +12,8 @@
 <label class="control-label">Specialty</label>
 
 <form asp-controller="HealthCareTeams" asp-action="NewAppt" method="post">
-    <select asp-for="Specialty" asp-items="Model.SpecialtySelectList" aspclass="form-control">
-        <option selected disabled>-- SELECT --</option>
+    <select asp-for="Specialty" asp-items="Model.SpecialtySelectList" class="form-control">
+        <option selected disabled>-- SELECT SPECIALTY--</option>
     </select>
 
     <span asp-validation-for="Specialty" class="text-danger"></span>

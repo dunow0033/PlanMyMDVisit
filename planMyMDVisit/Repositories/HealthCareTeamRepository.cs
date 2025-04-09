@@ -1,5 +1,6 @@
 ﻿using planMyMDVisit.Data;
 using planMyMDVisit.Models.Domain;
+using planMyMDVisit.Models.ViewModels;
 
 namespace planMyMDVisit.Repositories
 {
@@ -19,5 +20,13 @@ namespace planMyMDVisit.Repositories
 
             return healthCareTeam;
         }
+
+        //public async Task<CreateApptRequest> CreateApptAsync(CreateApptRequest createApptRequest)
+        //{
+        //    await planMyMDVisitContext.HealthCareTeams.AddAsync(createApptRequest);
+        //    await planMyMDVisitContext.SaveChangesAsync();
+
+        //    return createApptRequest;
+        //}
     }
 }

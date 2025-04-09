@@ -9,10 +9,12 @@ namespace planMyMDVisit.Models.ViewModels
         [Required]
         public string Specialty { get; set; }
         public Guid PatientId { get; set; }
-        public Doctor DoctorName { get; set; }
+        public string DoctorName { get; set; }
         public Guid DoctorId { get; set; }
         public DateTime Appointment { get; set; }
         public Patient Patient { get; set; }
+        public string FullName { get; set; }
         public List<SelectListItem> SpecialtySelectList { get; set; }
+        public List<SelectListItem> SpecialtyDoctorList { get; set; }
     }
 }

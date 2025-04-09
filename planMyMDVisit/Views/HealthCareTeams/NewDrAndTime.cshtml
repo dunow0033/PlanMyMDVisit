@@ -1,14 +1,11 @@
-﻿@model planMyMDVisit.Models.ViewModels.CreateApptRequest
+﻿@*@using planMyMDVisit.Models.Domain*@
+@model planMyMDVisit.Models.ViewModels.CreateApptRequest
+
+<label class="control-label">Available In-Network Doctors</label>
 
 <form asp-controller="HealthCareTeams" asp-action="ConfirmAppt" method="post">
-    <label class="control-label">Available In-Network Doctors</label>
-
-    <select class="form-control" asp-for="DoctorName">
-        <option selected disabled>-- SELECT DOCTOR--</option>
-        @foreach (var item in ViewBag.DoctorList)
-        {
-            <option value="@item.Value">@item.Text</option>
-        }
+   <select asp-for="DoctorId" asp-items="Model.SpecialtyDoctorList" class="form-control">
+        <option selected disabled>-- SELECT DOCTOR --</option>
     </select>
     <br />
     <label class="control-label">Date and Time</label>

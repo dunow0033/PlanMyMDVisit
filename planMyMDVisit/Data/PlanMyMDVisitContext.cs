@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using planMyMDVisit.Models.Domain;
+using planMyMDVisit.Models.ViewModels;
 
 namespace planMyMDVisit.Data
 {
@@ -28,6 +29,10 @@ namespace planMyMDVisit.Data
             var User4Id = Guid.NewGuid();
             var User5Id = Guid.NewGuid();
             var User6Id = Guid.NewGuid();
+            var User7Id = Guid.NewGuid();
+            var User8Id = Guid.NewGuid();
+            var User9Id = Guid.NewGuid();
+            var User10Id = Guid.NewGuid();
 
             modelBuilder.Entity<Doctor>()
                 .HasMany(d => d.Patients)
@@ -44,7 +49,6 @@ namespace planMyMDVisit.Data
                 .OnDelete(DeleteBehavior.Cascade) // Only allow cascade delete on one side
                 );
 
-
             modelBuilder.Entity<HealthCareTeam>()
                 .HasOne(ht => ht.Doctor)
                 .WithMany(d => d.HealthCareTeams)
@@ -56,6 +60,27 @@ namespace planMyMDVisit.Data
                 .WithMany(p => p.HealthCareTeams)
                 .HasForeignKey(ht => ht.PatientId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Patient>().HasData(
+                new Patient
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = User4Id
+                });
+
+            modelBuilder.Entity<Patient>().HasData(
+                new Patient
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = User5Id
+                });
+
+            modelBuilder.Entity<Patient>().HasData(
+                new Patient
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = User6Id
+                });
 
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -96,6 +121,24 @@ namespace planMyMDVisit.Data
                    Email = "helens@hotmail.com",
                    UserName = "helens"
                });
+            modelBuilder.Entity<User>().HasData(
+              new User
+              {
+                  Id = User5Id,
+                  FirstName = "Brad",
+                  LastName = "Connors",
+                  Email = "bradc@hotmail.com",
+                  UserName = "bradc"
+              });
+            modelBuilder.Entity<User>().HasData(
+              new User
+              {
+                  Id = User6Id,
+                  FirstName = "Rick",
+                  LastName = "Nyburgh",
+                  Email = "rickn@hotmail.com",
+                  UserName = "rickn"
+              });
 
 
             modelBuilder.Entity<Doctor>().HasData(
