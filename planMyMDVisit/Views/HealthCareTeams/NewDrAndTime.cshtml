@@ -1,4 +1,8 @@
-﻿@*@using planMyMDVisit.Models.Domain*@
+﻿@* <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script> *@
+
+@*@using planMyMDVisit.Models.Domain*@
 @model planMyMDVisit.Models.ViewModels.CreateApptRequest
 
 <label class="control-label">Available In-Network Doctors</label>
@@ -13,9 +17,16 @@
     @*@using(Html.BeginForm())
     {*@
         <br />
-        @Html.EditorFor(model => model.Appointment, new {htmlAttributes = new { @class="datepicker"}})
+        <input asp-for="Appointment"
+           type="datetime-local"
+           id="appt"
+           value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+            />
+        @*@Html.EditorFor(model => model.Appointment, new { @class = "datepicker form-control", @autocomplete = true })*@
     @*}*@
     <br />
+
+    <input type="hidden" asp-for="Specialty" />
 
     <span asp-validation-for="Appointment" class="text-danger"></span>
     
@@ -23,13 +34,15 @@
 </form>
 
 
-
-
-
-
- @* <input type="date"
-           id="start"
-           name="trip-start"
-           value="2018-07-22"
-           min="2018-01-01"
-           max="2018-12-31" /> *@
+@* <script> *@
+    // $(function () {
+    //     $('#appt').val(new Date().toDateInputValue());
+    // });
+    //document.getElementById('start').valueAsDate = new Date();
+    // $(function () {
+    //     $(".datepicker").datepicker({
+    //         dateFormat: "mm/dd/yy",
+    //         value: new Date()
+    //     }).datepicker("setDate", new Date());
+    // });
+@* </script> *@

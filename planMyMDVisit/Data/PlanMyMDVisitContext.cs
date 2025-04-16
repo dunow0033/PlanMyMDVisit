@@ -53,13 +53,13 @@ namespace planMyMDVisit.Data
                 .HasOne(ht => ht.Doctor)
                 .WithMany(d => d.HealthCareTeams)
                 .HasForeignKey(ht => ht.DoctorId)
-                .OnDelete(DeleteBehavior.Cascade); // Keep cascade delete on Doctor
+                .OnDelete(DeleteBehavior.NoAction); // Keep cascade delete on Doctor
 
-            modelBuilder.Entity<HealthCareTeam>()
-                .HasOne(ht => ht.Patient)
-                .WithMany(p => p.HealthCareTeams)
-                .HasForeignKey(ht => ht.PatientId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<HealthCareTeam>()
+            //    .HasOne(ht => ht.Patient)
+            //    .WithMany(p => p.HealthCareTeams)
+            //    .HasForeignKey(ht => ht.PatientId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Patient>().HasData(
                 new Patient
@@ -206,12 +206,6 @@ namespace planMyMDVisit.Data
                 .HasOne(u => u.Patient)
                 .WithOne(d => d.User)
                 .HasForeignKey<Patient>(p => p.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<HealthCareTeam>()
-                .HasOne(u => u.Doctor)
-                .WithMany(d => d.HealthCareTeams)
-                .HasForeignKey(p => p.DoctorId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<HealthCareTeam>()

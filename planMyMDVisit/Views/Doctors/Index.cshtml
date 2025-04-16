@@ -1,0 +1,24 @@
+﻿@model List<planMyMDVisit.Models.Domain.Doctor>
+
+<h2>In-Network Doctors</h2>
+<h6>Filter doctors by specialty:</h6>
+
+@*uses a dropdown list of specialties to filter out certain doctors from the list below*@
+@* @using(Html.BeginForm("Index", "Doctors", FormMethod.Get))
+    <select asp-for="Specialty" asp-items="Model.SpecialtySelectList" class="form-control">
+        <option selected disabled>-- SELECT SPECIALTY--</option>
+    </select> *@
+
+ @*List of doctors*@
+    @foreach(var hct in Model.OrderBy(d => d.Specialty))
+    {
+        <div>
+            <i>@hct.Specialty</i> | 
+            <strong>
+                <a href="@Url.Action("Show", "Doctors")">@hct.Name</a></strong>
+        </div>
+    }
+
+@* <form asp-controller="HealthCareTeams" asp-action="NewAppt" method="post">
+    
+</form> *@

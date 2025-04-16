@@ -5,6 +5,8 @@ using planMyMDVisit.Models.ViewModels;
 using planMyMDVisit.Repositories;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Numerics;
+using planMyMDVisit.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace planMyMDVisit.Controllers
 {
@@ -19,9 +21,13 @@ namespace planMyMDVisit.Controllers
             this.healthCareTeamRepository = healthCareTeamRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(Patient patient)
         {
-            return View();
+            var patientToFindGuid = await healthCareTeamRepository.GetPatientGuidFromPatient(patient);
+
+            var patientToFind = await healthCareTeamRepository.ReturnPatient(patientToFindGuid);
+
+            return View(patientToFind);
         }
 
         [HttpGet]
@@ -82,9 +88,11 @@ namespace planMyMDVisit.Controllers
 
             var model = new CreateApptRequest
             {
+                Specialty = specialty.ToString(),
                 SpecialtyDoctorList = doctors
                     //.OrderBy(s => s)
                     .Select(s => new SelectListItem { Text = s.Name, Value = s.Id.ToString() })
+                    //.Include(s => s.Specialty)
                     .ToList()
             };
 
@@ -114,7 +122,8 @@ namespace planMyMDVisit.Controllers
 
             var hct = new HealthCareTeam
             {
-                Specialty = TempData["Specialty"]?.ToString(),
+                //Specialty = TempData["Specialty"]?.ToString(),
+                Specialty = createApptRequest.Specialty,
                 DoctorId = doctorId,
                 Patient = createApptRequest.Patient,
                 Appointment = createApptRequest.Appointment,

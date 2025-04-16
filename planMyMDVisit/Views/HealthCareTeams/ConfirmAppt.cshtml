@@ -2,14 +2,19 @@
 
 <h4>Thank you!!  Here are the details of your new appointment:</h4>
 
-<span style="font: bold italic;">@Model.DoctorName</span>
+<span style="font: bold italic;">Doctor: @Model.DoctorName</span>
 
 <br/>
 <br/>
 
-<span style="font: bold italic;">@Model.FullName</span>
+<span style="font-weight: bold; font-style: italic;">Specialty: @Model.Specialty</span>
 
 <br />
 <br />
 
-<span style="font: bold italic;">@Model.Appointment</span>
+<span style="font-weight: bold; font-style: italic;">Patient: @Model.FullName</span>
+
+<br />
+<br />
+
+<span style="font-weight: bold; font-style: italic;">Apointment Date and Time: @Model.Appointment</span>

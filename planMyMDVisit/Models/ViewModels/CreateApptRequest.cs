@@ -6,7 +6,6 @@ namespace planMyMDVisit.Models.ViewModels
 {
     public class CreateApptRequest
     {
-        [Required]
         public string Specialty { get; set; }
         public Guid PatientId { get; set; }
         public string DoctorName { get; set; }

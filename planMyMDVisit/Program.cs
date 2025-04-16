@@ -26,6 +26,7 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IHealthCareTeamRepository, HealthCareTeamRepository>();
 
 var app = builder.Build();
@@ -48,5 +49,16 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//using(var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var context = services.GetRequiredService<PlanMyMDVisitContext>();
+
+//    context.Database.Migrate();
+
+//    var seeder = new DataSeeder(context);
+//    await seeder.SeedDoctorsAsync();
+//}
 
 app.Run();

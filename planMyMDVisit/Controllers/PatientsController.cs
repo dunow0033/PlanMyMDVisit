@@ -1,20 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using planMyMDVisit.Repositories;
 
 namespace planMyMDVisit.Controllers
 {
     public class PatientsController : Controller
     {
-        //private readonly IMovieRepository movieRepository;
+        private readonly IPatientRepository patientRepository;
 
-        public PatientsController()
+        public PatientsController(IPatientRepository patientRepository)
         {
-            //this.movieRepository = movieRepository;
+            this.patientRepository = patientRepository;
         }
 
         [HttpGet]
-        public IActionResult Show()
+        public async Task<IActionResult> Show()
         {
-            return View();
+            //get patient
+            var patient = await patientRepository.GetCurrentPatient();
+
+            return View(patient);
         }
     }
 }

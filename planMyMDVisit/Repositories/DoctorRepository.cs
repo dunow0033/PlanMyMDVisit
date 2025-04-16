@@ -21,9 +21,10 @@ namespace planMyMDVisit.Repositories
 
         public async Task<Guid> GetCurrentPatientID()
         {
-            var patientID = Guid.Parse("2B6A3DDA-AE8A-41E1-83B2-12DB17774530");
+            var patientID = Guid.Parse("2CEC381C-39EB-43B5-BE42-D2C9EACA1884");
 
             var patient = await planMyMDVisitDBContext.Patients
+                .Include(p => p.HealthCareTeams)
                 .FirstOrDefaultAsync(p => p.Id == patientID);
 
             return patient.Id;
@@ -31,7 +32,7 @@ namespace planMyMDVisit.Repositories
 
         public async Task<string> GetPatientFullName()
         {
-            var patientID = Guid.Parse("2B6A3DDA-AE8A-41E1-83B2-12DB17774530");
+            var patientID = Guid.Parse("2CEC381C-39EB-43B5-BE42-D2C9EACA1884");
 
             var patient = await planMyMDVisitDBContext.Patients
                 .Include(p => p.User)
