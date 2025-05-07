@@ -1,4 +1,6 @@
-﻿namespace planMyMDVisit.Models.Domain
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace planMyMDVisit.Models.Domain
 {
     public class Doctor
     {
@@ -10,15 +12,16 @@
         //public string? City { get; set; }
         //public string? State { get; set; }
         //public string? Zipcode { get; set; }
+        //public string? PhoneNumber { get; set; }
         //public string? Gender { get; set; }
         public User User { get; set; }
         public Guid UserId { get; set; }
         public ICollection<HealthCareTeam> HealthCareTeams { get; set; } = new List<HealthCareTeam>();
         public ICollection<Patient> Patients { get; set; } = new List<Patient>();
 
-        public static IQueryable<Doctor> Specialties(IQueryable<Doctor> doctors)
-        {
-            return doctors.Select(d => new Doctor { Specialty = d.Specialty }).Distinct().OrderBy(d => d.Specialty);
-        }
+        //public static IQueryable<Doctor> Specialties(IQueryable<Doctor> doctors)
+        //{
+        //    return doctors.Select(d => new Doctor { Specialty = d.Specialty }).Distinct().OrderBy(d => d.Specialty);
+        //}
     }
 }

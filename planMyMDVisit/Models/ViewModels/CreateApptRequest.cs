@@ -9,7 +9,7 @@ namespace planMyMDVisit.Models.ViewModels
         public string Specialty { get; set; }
         public Guid PatientId { get; set; }
         public string DoctorName { get; set; }
-        public Guid DoctorId { get; set; }
+        public Guid? DoctorId { get; set; }
         public DateTime Appointment { get; set; }
         public Patient Patient { get; set; }
         public string FullName { get; set; }

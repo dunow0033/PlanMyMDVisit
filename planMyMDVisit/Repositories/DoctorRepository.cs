@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using planMyMDVisit.Data;
 using planMyMDVisit.Models.Domain;
 
@@ -13,7 +14,7 @@ namespace planMyMDVisit.Repositories
             this.planMyMDVisitDBContext = planMyMDVisitDBContext;
         }
 
-        public async Task<List<String>> GetSpecialties()
+        public async Task<List<string>> GetSpecialties()
         {
             return await planMyMDVisitDBContext.Doctors
                 .Select(d => d.Specialty).ToListAsync();
@@ -60,11 +61,19 @@ namespace planMyMDVisit.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<string> GetDoctorNameByID(Guid doctorId)
+        public async Task<string> GetDoctorNameByID(Guid? doctorId)
         {
             return await planMyMDVisitDBContext.Doctors
                 .Where(s => s.Id == doctorId)
                 .Select(s => s.Name)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<string> GetDoctorSpecialtyByID(Guid? doctorId)
+        {
+            return await planMyMDVisitDBContext.Doctors
+                .Where(s => s.Id == doctorId)
+                .Select(s => s.Specialty)
                 .FirstOrDefaultAsync();
         }
 

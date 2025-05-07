@@ -7,7 +7,7 @@ namespace planMyMDVisit.Models.Domain
     {
         public Guid Id { get; set; }
         public Guid PatientId { get; set; }
-        public Guid DoctorId { get; set; }
+        public Guid? DoctorId { get; set; }
 
         [Required]
         public string Specialty { get; set; }

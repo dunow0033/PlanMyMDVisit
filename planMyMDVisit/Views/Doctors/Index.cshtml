@@ -1,23 +1,41 @@
-﻿@model List<planMyMDVisit.Models.Domain.Doctor>
+﻿@model planMyMDVisit.Models.ViewModels.DoctorIndexViewModel
 
 <h2>In-Network Doctors</h2>
 <h6>Filter doctors by specialty:</h6>
 
-@*uses a dropdown list of specialties to filter out certain doctors from the list below*@
-@* @using(Html.BeginForm("Index", "Doctors", FormMethod.Get))
-    <select asp-for="Specialty" asp-items="Model.SpecialtySelectList" class="form-control">
-        <option selected disabled>-- SELECT SPECIALTY--</option>
-    </select> *@
+@*uses a dropdown list of specialties to filter out certain doctors from the list below
+@using (Html.BeginForm("Index", "Doctors", FormMethod.Get))*@
+<form asp-controller="Doctors" asp-action="Index" method="GET">
+<select asp-for="SelectedSpecialty" asp-items="Model.SpecialtyListItems" id="list" name="specialty" class="form-control">
+    <option selected disabled>-- SELECT SPECIALTY--</option>
+</select>
 
- @*List of doctors*@
-    @foreach(var hct in Model.OrderBy(d => d.Specialty))
+    <input id="btnSearch" type="submit" value="Search" class="btn btn-primary" /> 
+    <a href="@Url.Action("Index", "Doctors")" id="resetSearch" class="btn btn-primary">Reset</a>
+</form>
+
+
+@*List of doctors*@
+@foreach(var hct in Model.Doctors.GroupBy(d => d.Specialty).OrderBy(d => d.Key))
+{
+    <h4>@hct.Key</h4>
+
+    @foreach (var doctor in hct.OrderBy(d => d.Name))
     {
         <div>
-            <i>@hct.Specialty</i> | 
+            <i>@doctor.Specialty</i>
             <strong>
-                <a href="@Url.Action("Show", "Doctors")">@hct.Name</a></strong>
+                <a href="@Url.Action("Show", "Doctors", new { id = doctor.Id })">@doctor.Name</a>
+            </strong>
         </div>
     }
+ }
+
+ <script>
+     function filterList() {
+        
+     }
+ </script>
 
 @* <form asp-controller="HealthCareTeams" asp-action="NewAppt" method="post">
     

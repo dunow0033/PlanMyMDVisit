@@ -48,7 +48,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Patients}/{action=Show}/{id?}");
 
 //using(var scope = app.Services.CreateScope())
 //{

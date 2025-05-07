@@ -1,0 +1,20 @@
+﻿@model planMyMDVisit.Models.ViewModels.CreateApptRequest
+
+<h2>@Model.DoctorName</h2>
+
+<h2>@Model.Specialty</h2>
+
+<form asp-controller="HealthCareTeams"
+      asp-action="ConfirmAppt"
+      asp-route-doctorName="@Model.DoctorName"
+      asp-route-specialty="@Model.Specialty">
+          <br />
+           <input asp-for="Appointment"
+                  type="datetime-local"
+                  id="appt"
+                  value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+
+                  <br />
+                  <br />
+<button type="submit" class="btn btn-primary">Confirm Appointment</button>
+</form>

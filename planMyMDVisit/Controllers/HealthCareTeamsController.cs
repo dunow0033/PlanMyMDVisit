@@ -48,13 +48,25 @@ namespace planMyMDVisit.Controllers
                 SpecialtySelectList = specialties
                     .Distinct()
                     .OrderBy(s => s)
-                    .Select(s => new SelectListItem { Text = s, Value = s })
+                    .Select(s => new SelectListItem { Text = s.ToString(), Value = s.ToString() })
                     .ToList()
             };
             
             //ViewBag.SpecialtyList = new SelectList(specialties);
 
             return View(model);
+        }
+
+        public IActionResult MakeNewAppt(CreateApptRequest createApptRequest)
+        {
+            var appt = new CreateApptRequest
+            {
+                Appointment = createApptRequest.Appointment,
+                DoctorName = createApptRequest.DoctorName,
+                Specialty = createApptRequest.Specialty
+            };
+
+            return View(appt);
         }
 
         [HttpPost]
@@ -75,10 +87,17 @@ namespace planMyMDVisit.Controllers
         public async Task<IActionResult> NewDrAndTime(CreateApptRequest createApptRequest)
         {
             //Console.WriteLine(TempData["Specialty"]);
+            //var specialty = TempData["Specialty"]?.ToString();
             var specialty = TempData["Specialty"];
 
-            //var doctors = await doctorRepository.GetDoctorsBySpecialty(createApptRequest.Specialty);
+            //var specialtyItem = new SelectListItem
+            //{
+            //    Text = specialty,
+            //    Value = specialty
+            //};
+
             var doctors = await doctorRepository.GetDoctorsBySpecialty(specialty.ToString());
+            //var doctors = await doctorRepository.GetDoctorsBySpecialty(specialtyItem);
 
             if (doctors == null | !doctors.Any())
             {
@@ -116,7 +135,17 @@ namespace planMyMDVisit.Controllers
         public async Task<IActionResult> ConfirmAppt(CreateApptRequest createApptRequest)
         {
             //Guid doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
-            Guid doctorId = createApptRequest.DoctorId;
+
+            Guid? doctorId = null;
+
+            if (createApptRequest.DoctorId != null)
+            {
+                doctorId = createApptRequest.DoctorId;
+            }
+            else
+            {
+                doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
+            }
 
             Guid tempPatientId = await doctorRepository.GetCurrentPatientID();
 
@@ -146,6 +175,43 @@ namespace planMyMDVisit.Controllers
             await healthCareTeamRepository.CreateApptAsync(hct);
 
             return View(appt);
+        }
+
+        [HttpPost]
+        [ActionName("ConfirmAppt2")]
+        public async Task<IActionResult> ConfirmAppt2(CreateApptRequest createApptRequest)
+        {
+            //Guid doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
+            Guid doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
+
+            Guid tempPatientId = await doctorRepository.GetCurrentPatientID();
+
+            var hct = new HealthCareTeam
+            {
+                //Specialty = TempData["Specialty"]?.ToString(),
+                Specialty = createApptRequest.Specialty,
+                DoctorId = doctorId,
+                Patient = createApptRequest.Patient,
+                Appointment = createApptRequest.Appointment,
+                PatientId = tempPatientId
+            };
+
+            var appt = new CreateApptRequest
+            {
+                Specialty = hct.Specialty,
+                DoctorId = hct.DoctorId,
+                Patient = hct.Patient,
+                Appointment = hct.Appointment,
+                PatientId = hct.PatientId,
+                FullName = await doctorRepository.GetPatientFullName(),
+                DoctorName = await doctorRepository.GetDoctorNameByID(hct.DoctorId)
+            };
+
+            Console.WriteLine("Patient FullName " + appt.FullName);
+
+            await healthCareTeamRepository.CreateApptAsync(hct);
+
+            return View("ConfirmAppt", appt);
         }
     }
 }
