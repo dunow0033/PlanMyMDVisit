@@ -20,12 +20,12 @@
 {
     <h4>@hct.Key</h4>
 
-    @foreach (var doctor in hct.OrderBy(d => d.Name))
+    @foreach (var doctor in hct.OrderBy(d => d.User.FullName()))
     {
         <div>
             <i>@doctor.Specialty</i>
             <strong>
-                <a href="@Url.Action("Show", "Doctors", new { id = doctor.Id })">@doctor.Name</a>
+                <a href="@Url.Action("Show", "Doctors", new { id = doctor.Id })">@doctor.User.FullName()</a>
             </strong>
         </div>
     }

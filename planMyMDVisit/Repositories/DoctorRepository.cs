@@ -22,7 +22,7 @@ namespace planMyMDVisit.Repositories
 
         public async Task<Guid> GetCurrentPatientID()
         {
-            var patientID = Guid.Parse("2CEC381C-39EB-43B5-BE42-D2C9EACA1884");
+            var patientID = Guid.Parse("E8303783-C127-463C-9120-3AB1EFCA7BDB");
 
             var patient = await planMyMDVisitDBContext.Patients
                 .Include(p => p.HealthCareTeams)
@@ -33,9 +33,10 @@ namespace planMyMDVisit.Repositories
 
         public async Task<string> GetPatientFullName()
         {
-            var patientID = Guid.Parse("2CEC381C-39EB-43B5-BE42-D2C9EACA1884");
+            var patientID = Guid.Parse("E8303783-C127-463C-9120-3AB1EFCA7BDB");
 
             var patient = await planMyMDVisitDBContext.Patients
+                //.AsAsyncEnumerable()
                 .Include(p => p.User)
                 .FirstOrDefaultAsync(p => p.Id == patientID);
 
@@ -49,23 +50,31 @@ namespace planMyMDVisit.Repositories
 
         public async Task<List<Doctor>> GetDoctorsBySpecialty(string specialty)
         {
-            return await planMyMDVisitDBContext.Doctors
-                .Where(s => s.Specialty == specialty).ToListAsync();
+            var doctors = await planMyMDVisitDBContext.Doctors
+                .Include(d  => d.User)
+                .Where(s => s.Specialty.ToLower() == specialty.ToLower()).ToListAsync();
+
+            return doctors;
         }
 
-        public async Task<Guid> GetDoctorGuidByName(string doctorName)
+        public async Task<Guid?> GetDoctorGuidByName(string doctorName)
         {
-            return await planMyMDVisitDBContext.Doctors
-                .Where(s => s.Name == doctorName)
-                .Select(s => s.Id)
-                .FirstOrDefaultAsync();
+            var doctors = await planMyMDVisitDBContext.Doctors.ToListAsync();
+            var doctor = doctors.FirstOrDefault(d => d.User.FullName() == doctorName);
+
+            return doctor?.Id;
+
+            //return await planMyMDVisitDBContext.Doctors
+            //    .Where(s => s.FullName() == doctorName)
+            //    .Select(s => s.Id)
+            //    .FirstOrDefaultAsync();
         }
 
         public async Task<string> GetDoctorNameByID(Guid? doctorId)
         {
             return await planMyMDVisitDBContext.Doctors
                 .Where(s => s.Id == doctorId)
-                .Select(s => s.Name)
+                .Select(s => s.User.FullName())
                 .FirstOrDefaultAsync();
         }
 

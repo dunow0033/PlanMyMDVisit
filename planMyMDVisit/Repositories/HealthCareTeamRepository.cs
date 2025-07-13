@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using planMyMDVisit.Data;
 using planMyMDVisit.Models.Domain;
 using planMyMDVisit.Models.ViewModels;
@@ -22,11 +23,18 @@ namespace planMyMDVisit.Repositories
             return healthCareTeam;
         }
 
+        public async Task<HealthCareTeam[]> ReturnPatientApptListAsync(Guid patientID)
+        {
+            var healthCareTeams = await planMyMDVisitContext.HealthCareTeams.Where(hct => hct.PatientId == patientID).ToArrayAsync();
+
+            return healthCareTeams;
+        }
+
         public async Task<Guid> GetPatientGuidFromPatient(Patient patient)
         {
             //var patientToFind = await planMyMDVisitContext.Patients.FirstOrDefaultAsync(p => p.Id == patient.Id);
 
-            var patientID = Guid.Parse("2CEC381C-39EB-43B5-BE42-D2C9EACA1884");
+            var patientID = Guid.Parse("FAC5316D-21ED-46C9-BF61-125D6EF3F3C6");
 
             var patientToFind = await planMyMDVisitContext.Patients.FirstOrDefaultAsync(p => p.Id == patientID);
 

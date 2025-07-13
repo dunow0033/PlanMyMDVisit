@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace planMyMDVisit.Controllers
 {
+    [Route("HealthCareTeams")]
     public class HealthCareTeamsController : Controller
     {
         private readonly IDoctorRepository doctorRepository;
@@ -21,6 +22,7 @@ namespace planMyMDVisit.Controllers
             this.healthCareTeamRepository = healthCareTeamRepository;
         }
 
+        [HttpGet("Index")]
         public async Task<IActionResult> Index(Patient patient)
         {
             var patientToFindGuid = await healthCareTeamRepository.GetPatientGuidFromPatient(patient);
@@ -30,7 +32,21 @@ namespace planMyMDVisit.Controllers
             return View(patientToFind);
         }
 
-        [HttpGet]
+        [HttpGet("patientList/{patientID}")]
+        public async Task<IActionResult> ReturnPatientApptListAsync(Guid patientID)
+        {
+            var healthCareTeams = await healthCareTeamRepository.ReturnPatientApptListAsync(patientID);
+
+            var calendarEvents = healthCareTeams.Select(hct => new
+            {
+                title = hct.Specialty ?? "Appoinment",
+                start = hct.Appointment.ToString("s")
+            });
+
+            return new JsonResult(calendarEvents);
+        }
+
+        [HttpGet("NewAppt")]
         public async Task<IActionResult> NewAppt()
         {
             var specialties = await doctorRepository.GetSpecialties();
@@ -57,6 +73,7 @@ namespace planMyMDVisit.Controllers
             return View(model);
         }
 
+        [HttpGet("MakeNewAppt")]
         public IActionResult MakeNewAppt(CreateApptRequest createApptRequest)
         {
             var appt = new CreateApptRequest
@@ -69,7 +86,7 @@ namespace planMyMDVisit.Controllers
             return View(appt);
         }
 
-        [HttpPost]
+        [HttpPost("NewAppt")]
         public IActionResult NewAppt(CreateApptRequest createApptRequest)
         {
             var appt = new HealthCareTeam
@@ -77,18 +94,20 @@ namespace planMyMDVisit.Controllers
                 Specialty = createApptRequest.Specialty,
             };
 
-            TempData["Specialty"] = appt.Specialty;
+            //TempData["Specialty"] = appt.Specialty;
 
-            return RedirectToAction("NewDrAndTime");
+            return RedirectToAction("NewDrAndTime", new { specialty = appt.Specialty });
         }
 
         [HttpGet]
         [ActionName("NewDrAndTime")]
-        public async Task<IActionResult> NewDrAndTime(CreateApptRequest createApptRequest)
+        //public async Task<IActionResult> NewDrAndTime(CreateApptRequest createApptRequest)
+        public async Task<IActionResult> NewDrAndTime(string specialty)
         {
             //Console.WriteLine(TempData["Specialty"]);
-            //var specialty = TempData["Specialty"]?.ToString();
-            var specialty = TempData["Specialty"];
+            //var specialty = TempData.Peek("Specialty");
+            
+            //var specialty = TempData["Specialty"];
 
             //var specialtyItem = new SelectListItem
             //{
@@ -96,7 +115,7 @@ namespace planMyMDVisit.Controllers
             //    Value = specialty
             //};
 
-            var doctors = await doctorRepository.GetDoctorsBySpecialty(specialty.ToString());
+            var doctors = await doctorRepository.GetDoctorsBySpecialty(specialty);
             //var doctors = await doctorRepository.GetDoctorsBySpecialty(specialtyItem);
 
             if (doctors == null | !doctors.Any())
@@ -110,7 +129,7 @@ namespace planMyMDVisit.Controllers
                 Specialty = specialty.ToString(),
                 SpecialtyDoctorList = doctors
                     //.OrderBy(s => s)
-                    .Select(s => new SelectListItem { Text = s.Name, Value = s.Id.ToString() })
+                    .Select(s => new SelectListItem { Text = s.User.FullName(), Value = s.Id.ToString() })
                     //.Include(s => s.Specialty)
                     .ToList()
             };
@@ -177,41 +196,41 @@ namespace planMyMDVisit.Controllers
             return View(appt);
         }
 
-        [HttpPost]
-        [ActionName("ConfirmAppt2")]
-        public async Task<IActionResult> ConfirmAppt2(CreateApptRequest createApptRequest)
-        {
-            //Guid doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
-            Guid doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
+        //[HttpPost]
+        //[ActionName("ConfirmAppt2")]
+        //public async Task<IActionResult> ConfirmAppt2(CreateApptRequest createApptRequest)
+        //{
+        //    //Guid doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
+        //    Guid doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
 
-            Guid tempPatientId = await doctorRepository.GetCurrentPatientID();
+        //    Guid tempPatientId = await doctorRepository.GetCurrentPatientID();
 
-            var hct = new HealthCareTeam
-            {
-                //Specialty = TempData["Specialty"]?.ToString(),
-                Specialty = createApptRequest.Specialty,
-                DoctorId = doctorId,
-                Patient = createApptRequest.Patient,
-                Appointment = createApptRequest.Appointment,
-                PatientId = tempPatientId
-            };
+        //    var hct = new HealthCareTeam
+        //    {
+        //        //Specialty = TempData["Specialty"]?.ToString(),
+        //        Specialty = createApptRequest.Specialty,
+        //        DoctorId = doctorId,
+        //        Patient = createApptRequest.Patient,
+        //        Appointment = createApptRequest.Appointment,
+        //        PatientId = tempPatientId
+        //    };
 
-            var appt = new CreateApptRequest
-            {
-                Specialty = hct.Specialty,
-                DoctorId = hct.DoctorId,
-                Patient = hct.Patient,
-                Appointment = hct.Appointment,
-                PatientId = hct.PatientId,
-                FullName = await doctorRepository.GetPatientFullName(),
-                DoctorName = await doctorRepository.GetDoctorNameByID(hct.DoctorId)
-            };
+        //    var appt = new CreateApptRequest
+        //    {
+        //        Specialty = hct.Specialty,
+        //        DoctorId = hct.DoctorId,
+        //        Patient = hct.Patient,
+        //        Appointment = hct.Appointment,
+        //        PatientId = hct.PatientId,
+        //        FullName = await doctorRepository.GetPatientFullName(),
+        //        DoctorName = await doctorRepository.GetDoctorNameByID(hct.DoctorId)
+        //    };
 
-            Console.WriteLine("Patient FullName " + appt.FullName);
+        //    Console.WriteLine("Patient FullName " + appt.FullName);
 
-            await healthCareTeamRepository.CreateApptAsync(hct);
+        //    await healthCareTeamRepository.CreateApptAsync(hct);
 
-            return View("ConfirmAppt", appt);
-        }
+        //    return View("ConfirmAppt", appt);
+        //}
     }
 }

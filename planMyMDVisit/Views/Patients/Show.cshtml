@@ -1,5 +1,12 @@
-﻿@using planMyMDVisit.Utilities
-@model planMyMDVisit.Models.Domain.Patient
+﻿@using Microsoft.AspNetCore.Identity
+@using planMyMDVisit.Models.Domain
+@using planMyMDVisit.Utilities
+@model planMyMDVisit.Models.ViewModels.PatientEventViewModel
+@inject SignInManager<User> signInManager
+
+@* @{
+    var events = (IEnumerable<planMyMDVisit.Models.ViewModels.PatientEventViewModel>)ViewData["events"];
+} *@
 
 <style>
     #calendar-container {
@@ -23,10 +30,13 @@
 @*<link rel="stylesheet" href="https://cdn.jsdeliver.net/npm/fullcalendar@6.1.15/main.min.css">*@
 @*<script src="https://cdn.jsdeliver.net/npm/fullcalendar@5.1.0/main.min.js"></script>*@
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar/core@6.1.15/index.global.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar/list@6.1.15/index.global.min.js"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/fullcalendar/core@6.1.15/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/list@6.1.15/index.global.min.js"></script>*@
 
-@*<h4>Welcome, @Model.FullName</h4>*@
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("User")))
+{
+    <h4>Welcome, @Model.Patient.User.FullName()</h4>
+}
 
 <div class="col s12 m7">
     <div class="card horizontal">
@@ -44,30 +54,40 @@
 <br />
 <br />
 
-<a asp-action="Index" asp-controller="HealthCareTeams" asp-route-patient="@Model" class="waves-effect waves-light btn btn-primary" style="width: 200px;">View All</a>
+<a asp-action="Index" asp-controller="HealthCareTeams" asp-route-patient="@Model.Patient" class="waves-effect waves-light btn btn-primary" style="width: 200px;">View All</a>
 
 <div class="row">
     <div class="col s12 m4 l4">
 
         <h5>Your Care Team</h5>
 
-       @foreach (var hct in Helpers.TwoLatestCareTeams(Model))
+       @* @foreach (var hct in Helpers.TwoLatestCareTeams(Model.Patient))
         {
             <div class="card blue lighten-5">
                 <div class="card-content black-text">
                     <span class="card-title truncate">@hct.Doctor.Specialty</span>
                 </div>
                 <div class="card-action">
-                    @hct.Doctor.Name
+                    @hct.Doctor.User.FullName()
                 </div>
             </div>
-        }
+        } *@
 
         </div>
-
+        
     <div id="calendar-container">
         <div id="calendar"></div>
     </div>
  </div>
 
-<script type="module" src="~/dist/Calendar.js"></script>
+
+@*<script src="https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/daygrid/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/list/index.global.min.js"></script>*@
+
+@*<script src="https://cdn.jsdelivr.net/npm/fullcalendar/core@6.1.17/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/daygrid@6.1.17/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/timegrid@6.1.17/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/list@6.1.17/index.global.min.js"></script>*@
+<script type="module" src="~/dist/calendar.js"></script>
+

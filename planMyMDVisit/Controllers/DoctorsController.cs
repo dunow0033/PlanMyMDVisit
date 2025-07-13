@@ -29,14 +29,14 @@ namespace planMyMDVisit.Controllers
             if (!string.IsNullOrWhiteSpace(specialty))
             {
                 doctors = await context.Doctors
-                    .Include(d => d.User)
+                    //.Include(d => d.User)
                     .Where(d => d.Specialty == specialty)
                     .ToListAsync();
             }
             else
             {
                 doctors = await context.Doctors
-                    .Include(d => d.User)
+                    //.Include(d => d.User)
                     .ToListAsync();
             }
 
@@ -66,7 +66,6 @@ namespace planMyMDVisit.Controllers
             {
                 Specialty = findDoctorSpecialty,
                 Id = id,
-                Name = findDoctor
             };
 
             return View(doctor);

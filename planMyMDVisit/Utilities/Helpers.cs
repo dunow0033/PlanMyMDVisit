@@ -1,4 +1,5 @@
 ﻿using planMyMDVisit.Models.Domain;
+using planMyMDVisit.Repositories;
 
 namespace planMyMDVisit.Utilities
 {

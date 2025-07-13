@@ -1,4 +1,6 @@
-﻿export default {
+﻿import { defineConfig } from 'vite';
+
+export default defineConfig ({
     optimizeDeps: {
         include: ['@fullcalendar/core', '@fullcalendar/list']
     },
@@ -7,11 +9,11 @@
         emptyOutDir: true, // Clears previous build files
         rollupOptions: {
             input: {
-                calendar: "./wwwroot/js/Calendar.js", // Explicit entry file
+                calendar: "./src/Calendar.js", // Explicit entry file
             },
             output: {
                 entryFileNames: "[name].js", // Output keeps filename
             },
         },
     },
-};
+});

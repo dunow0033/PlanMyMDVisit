@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <Folder Include="wwwroot\dist\" />
+    <Content Include="src\Calendar.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +19,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 
 </Project>

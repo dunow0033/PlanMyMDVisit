@@ -9,75 +9,85 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = planMyMDVisit
 build_property.RootNamespace = planMyMDVisit
-build_property.ProjectDir = C:\Users\Admin\source\repos\planMyMDVisit\planMyMDVisit\
+build_property.ProjectDir = C:\Users\PC\source\repos\planMyMDVisit\planMyMDVisit\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Admin\source\repos\planMyMDVisit\planMyMDVisit
+build_property.MSBuildProjectDirectory = C:\Users\PC\source\repos\planMyMDVisit\planMyMDVisit
 build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Doctors/Index.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Doctors/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Doctors/Show.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Doctors/Show.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yc1xTaG93LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/ConfirmAppt.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/ConfirmAppt.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXENvbmZpcm1BcHB0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/ConfirmApt2.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXENvbmZpcm1BcHQyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/Index.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/MakeNewAppt.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/MakeNewAppt.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXE1ha2VOZXdBcHB0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/NewAppt.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/NewAppt.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXE5ld0FwcHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/NewDrAndTime.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/HealthCareTeams/NewDrAndTime.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2FyZVRlYW1zXE5ld0RyQW5kVGltZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Home/Index.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Patients/Show.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Patients/Show.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudHNcU2hvdy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Shared/Error.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Users/Show.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcU2hvdy5jc2h0bWw=
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/User/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/_ViewImports.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/User/Show.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTaG93LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/_ViewStart.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/planMyMDVisit/planMyMDVisit/Views/Shared/_Layout.cshtml]
+[C:/Users/PC/source/repos/planMyMDVisit/planMyMDVisit/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yhy734q6oh

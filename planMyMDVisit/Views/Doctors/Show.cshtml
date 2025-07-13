@@ -1,6 +1,6 @@
 ﻿@model planMyMDVisit.Models.Domain.Doctor
 
-<h2>Name: @Model.Name</h2>
+<h2>Name: @Model.User.FullName()</h2>
 
 <h2>Specialty: @Model.Specialty</h2>
 
@@ -8,7 +8,7 @@
 
 <form asp-controller="HealthCareTeams"
       asp-action="MakeNewAppt"
-      asp-route-doctorName="@Model.Name"
+      asp-route-doctorName="@Model.User.FullName()"
       asp-route-specialty="@Model.Specialty">
     <button type="submit" class="btn btn-primary">Schedule Appointment</button>
     <a href="@Url.Action("Index", "Doctors")" id="backToDrList" class="btn btn-primary">Back to List</a>

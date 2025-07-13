@@ -9,6 +9,8 @@ namespace planMyMDVisit.Repositories
         Task<Patient> ReturnPatient(Guid patientId);
 
         Task<Guid> GetPatientGuidFromPatient(Patient patient);
+
+        Task<HealthCareTeam[]> ReturnPatientApptListAsync(Guid patientID);
         //Task<CreateApptRequest> CreateApptAsync(CreateApptRequest createApptRequest);
     }
 }
