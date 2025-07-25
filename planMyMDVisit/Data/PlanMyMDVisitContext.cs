@@ -18,7 +18,7 @@ namespace planMyMDVisit.Data
 
         public DbSet<Patient> Patients { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<IdentityUser> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -198,6 +198,42 @@ namespace planMyMDVisit.Data
                 new Doctor { Id = dId5, UserId = User11Id, Specialty = "Chiropractic" },
                 new Doctor { Id = dId6, UserId = User12Id, Specialty = "Dermatology" }
              );
+
+            //Seed Roles
+            
+            var adminId = Guid.Parse("a0cab2c3-6558-4a1c-be81-dfb39180da3d");
+
+            modelBuilder.Entity<IdentityRole<Guid>>().HasData(
+            
+                new IdentityRole<Guid>
+                {
+                    Id = adminId,
+                    Name = "admin",
+                    NormalizedName = "Admin",    
+                }
+            );
+
+            var admin = new User
+            {
+                Id = adminId,
+                UserName = "admin",
+                Email = "admin@planMyMD.com",
+                DoctorOrPatient = "admin",
+                NormalizedEmail = "admin@planMyMD.com".ToUpper(),
+                NormalizedUserName = "admin".ToUpper(),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            admin.PasswordHash = new PasswordHasher<User>().HashPassword(admin, "admin");
+
+            modelBuilder.Entity<User>().HasData(admin);
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
+                new IdentityUserRole<Guid>
+                {
+                    UserId = Guid.Parse("A0CAB2C3-6558-4A1C-BE81-DFB39180DA3D"),  // admin user ID
+                    RoleId = Guid.Parse("A0CAB2C3-6558-4A1C-BE81-DFB39180DA3D")
+                });
         }
     }
 }

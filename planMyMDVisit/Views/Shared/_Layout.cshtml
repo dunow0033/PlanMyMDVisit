@@ -26,8 +26,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                @*@if(signInManager.IsSignedIn(User) && User.IsInRole("User"))*@
-                @if(signInManager.IsSignedIn(User))
+                @if(signInManager.IsSignedIn(User) && User.IsInRole("User"))
+                @*@if(signInManager.IsSignedIn(User))*@
                 {
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
@@ -35,13 +35,19 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Patients" asp-action="Show">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="HealthCareTeams" asp-action="Index">Care Team</a>
+                                @{
+                                    var patientId = (Model as planMyMDVisit.Models.ViewModels.PatientEventViewModel)?.Patient?.Id;
+                                 }
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="HealthCareTeams" asp-action="Index" asp-route-patientId="@patientId">Care Team</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Show">Profile</a>
+                                @{
+                                    var patient = (Model as planMyMDVisit.Models.ViewModels.PatientEventViewModel)?.Patient?.Id;
+                                }
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile" asp-route-patientId="@patientId">Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
@@ -49,7 +55,13 @@
 
                         </ul>
                     </div>
-                  }  else  {
+                }
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <h1>Hello Admin!!</h1>
+                }
+                else
+                {
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">

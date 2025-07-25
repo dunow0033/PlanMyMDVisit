@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Numerics;
 using planMyMDVisit.Data;
 using Microsoft.EntityFrameworkCore;
+using planMyMDVisit.Utilities;
 
 namespace planMyMDVisit.Controllers
 {
@@ -14,22 +15,38 @@ namespace planMyMDVisit.Controllers
     public class HealthCareTeamsController : Controller
     {
         private readonly IDoctorRepository doctorRepository;
+        private readonly IPatientRepository patientRepository;
         private readonly IHealthCareTeamRepository healthCareTeamRepository;
 
-        public HealthCareTeamsController(IDoctorRepository doctorRepository, IHealthCareTeamRepository healthCareTeamRepository)
+        public HealthCareTeamsController(IDoctorRepository doctorRepository, IPatientRepository patientRepository, IHealthCareTeamRepository healthCareTeamRepository)
         {
             this.doctorRepository = doctorRepository;
+            this.patientRepository = patientRepository;
             this.healthCareTeamRepository = healthCareTeamRepository;
         }
 
         [HttpGet("Index")]
-        public async Task<IActionResult> Index(Patient patient)
+        //public async Task<IActionResult> Index(Patient patient)
+        public async Task<IActionResult> Index(Guid patientId)
         {
-            var patientToFindGuid = await healthCareTeamRepository.GetPatientGuidFromPatient(patient);
+            //var patientToFindGuid = await healthCareTeamRepository.GetPatientGuidFromPatient(patient);
 
-            var patientToFind = await healthCareTeamRepository.ReturnPatient(patientToFindGuid);
+            var patientToFind = await healthCareTeamRepository.ReturnPatient(patientId);
 
-            return View(patientToFind);
+            if(patientToFind == null)
+            {
+                return NotFound("Patient not found.");
+            }
+
+            var careTeams = Helpers.AllCareTeams(patientToFind);
+
+            var viewModel = new PatientEventViewModel
+            {
+                Patient = patientToFind,
+                HealthCareTeams = careTeams
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet("patientList/{patientID}")]
@@ -166,7 +183,7 @@ namespace planMyMDVisit.Controllers
                 doctorId = await doctorRepository.GetDoctorGuidByName(createApptRequest.DoctorName);
             }
 
-            Guid tempPatientId = await doctorRepository.GetCurrentPatientID();
+            Guid? tempPatientId = await patientRepository.GetCurrentPatientID();
 
             var hct = new HealthCareTeam
             {

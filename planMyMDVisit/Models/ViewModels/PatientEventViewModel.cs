@@ -7,5 +7,7 @@ namespace planMyMDVisit.Models.ViewModels
         public Patient Patient { get; set; }
         
         public IEnumerable<Event> Events { get; set; }
+
+        public ICollection<HealthCareTeam> HealthCareTeams { get; set; }
     }
 }

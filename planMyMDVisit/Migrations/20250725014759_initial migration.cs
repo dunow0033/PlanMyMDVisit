@@ -32,11 +32,11 @@ namespace planMyMDVisit.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    DoctorOrPatient = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DoctorOrPatient = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
@@ -53,6 +53,31 @@ namespace planMyMDVisit.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -225,7 +250,7 @@ namespace planMyMDVisit.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Specialty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Appointment = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -246,22 +271,28 @@ namespace planMyMDVisit.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"), null, "admin", "Admin" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DoctorOrPatient", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("0a7912f3-32a3-4d72-8806-cc1b463c0ad8"), 0, "0bfc4aad-e4a8-4817-ad47-95bc01ec3284", "patient", "helens@hotmail.com", false, "Helen", "Skyburgh", false, null, null, null, null, null, false, null, false, "helens" },
-                    { new Guid("1e6bed56-4cee-41ec-96c6-5dec5af09219"), 0, "eb45fe60-3e4b-47ec-b6b3-8503ff7f5875", "doctor", "samr@hotmail.com", false, "Sammy", "Rostun", false, null, null, null, null, null, false, null, false, "samr" },
-                    { new Guid("2ee132bd-ccc1-453d-b420-436c53c0e388"), 0, "12533ff2-b32e-44f9-8d47-8ea7d0ff77ec", "patient", "vanessar@hotmail.com", false, "Vanessa", "Reagan", false, null, null, null, null, null, false, null, false, "vanessar" },
-                    { new Guid("41766b94-419e-4a15-821a-7f5726be3704"), 0, "8b064866-76ae-4a36-8c9c-8ec7fde6a8de", "patient", "mikej@hotmail.com", false, "Mike", "Johnson", false, null, null, null, null, null, false, null, false, "mikej" },
-                    { new Guid("7a833aa0-a684-4f19-87cf-6a97316e3e01"), 0, "80268648-2340-48d5-a31b-67fc4d720944", "doctor", "jacks@hotmail.com", false, "Jack", "Sackson", false, null, null, null, null, null, false, null, false, "jacks" },
-                    { new Guid("95c11752-0fb2-4ce4-99b6-8eb255701310"), 0, "1050f54f-bd78-4826-8848-8e0b9d0d7389", "doctor", "nickp@hotmail.com", false, "Nicholas", "Perkins", false, null, null, null, null, null, false, null, false, "nickp" },
-                    { new Guid("c273e0b0-3892-427b-8776-945b103ce234"), 0, "bf4f792b-6f68-4094-8a47-0c93f1ac58c4", "doctor", "timr@hotmail.com", false, "Timmy", "Rudner", false, null, null, null, null, null, false, null, false, "timr" },
-                    { new Guid("eb0e38ce-93ec-4c4f-b559-200e943eb87a"), 0, "42894d5f-a7e4-4f43-89b3-921fc73d8da0", "patient", "danr@hotmail.com", false, "Dan", "Riley", false, null, null, null, null, null, false, null, false, "danr" },
-                    { new Guid("eefa3bf8-2537-42dc-9620-e5f74763d7db"), 0, "7649ddae-5124-4e0d-80f9-e41b19fe612d", "patient", "rickn@hotmail.com", false, "Rick", "Nyburgh", false, null, null, null, null, null, false, null, false, "rickn" },
-                    { new Guid("f831e798-d700-48c6-a30d-405717da0630"), 0, "78f1ef50-a2e6-4fb8-88b9-47d71ed68130", "doctor", "path@hotmail.com", false, "Patrick", "Hordner", false, null, null, null, null, null, false, null, false, "path" },
-                    { new Guid("f887f3ba-c206-4c06-9363-1f3596a7eae6"), 0, "343d0124-6cda-4302-86eb-c53b212ff9ee", "patient", "dannyt@hotmail.com", false, "Danny", "Tonner", false, null, null, null, null, null, false, null, false, "dannyt" },
-                    { new Guid("fac5316d-21ed-46c9-bf61-125d6ef3f3c6"), 0, "aa55a40b-a000-4da4-863b-4b90051d6439", "patient", "bradc@hotmail.com", false, "Brad", "Connors", false, null, null, null, null, null, false, null, false, "bradc" }
+                    { new Guid("19905a09-5e24-4537-a73a-8cfd67f690ff"), 0, "0ba6f472-f769-4431-b992-7a4bd04ebe27", "doctor", "path@hotmail.com", false, "Patrick", "Hordner", false, null, null, null, null, null, false, null, false, "path" },
+                    { new Guid("31b695b0-7202-496e-ae64-26f083e6f3b5"), 0, "217a87ff-ef95-47a9-8733-4c39b16254f8", "patient", "dannyt@hotmail.com", false, "Danny", "Tonner", false, null, null, null, null, null, false, null, false, "dannyt" },
+                    { new Guid("33a1a8b8-8fa7-42e4-8a14-63ff2ba07d27"), 0, "be2fdd38-5c73-4fe2-81a6-cf348b797253", "patient", "mikej@hotmail.com", false, "Mike", "Johnson", false, null, null, null, null, null, false, null, false, "mikej" },
+                    { new Guid("3a4df621-fc4d-4902-a11b-9fdf9937f832"), 0, "f5aca1e0-72f8-4b3f-b915-6fb12ce86142", "patient", "bradc@hotmail.com", false, "Brad", "Connors", false, null, null, null, null, null, false, null, false, "bradc" },
+                    { new Guid("78fd81f6-4f93-405a-9c8a-be2f4fe3cceb"), 0, "311df731-c22c-4c74-91af-fed6d617febd", "doctor", "timr@hotmail.com", false, "Timmy", "Rudner", false, null, null, null, null, null, false, null, false, "timr" },
+                    { new Guid("7a94bbe4-e529-47b6-9c95-86829197dfc7"), 0, "c25ed1cc-02fc-4523-a51b-4b56e791554a", "patient", "helens@hotmail.com", false, "Helen", "Skyburgh", false, null, null, null, null, null, false, null, false, "helens" },
+                    { new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"), 0, "e54b0c92-30c9-4a20-a907-11e90656a3ac", null, "admin@planMyMD.com", false, null, null, false, null, "ADMIN@PLANMYMD.COM", "ADMIN@PLANMYMD.COM", "AQAAAAIAAYagAAAAEEJB3sxMD1lN+JcPyFE/ACU/J7QKkUCbSUZj5yEOXXvjFCoTyN5vaYDj+/ywFSiZQA==", null, false, null, false, "admin" },
+                    { new Guid("ae05bdf8-a24f-4918-b250-4d0b6a3ed2a5"), 0, "761c94bd-05a3-4a9f-9a9e-246637ce0543", "patient", "rickn@hotmail.com", false, "Rick", "Nyburgh", false, null, null, null, null, null, false, null, false, "rickn" },
+                    { new Guid("b0dead9b-bd5a-4195-b9a1-fdb09f9963b3"), 0, "aa81b439-4b12-4825-b001-52bf23160dd7", "doctor", "samr@hotmail.com", false, "Sammy", "Rostun", false, null, null, null, null, null, false, null, false, "samr" },
+                    { new Guid("c6c10c83-a67c-43fd-b82c-05adf1acd0c6"), 0, "385fbcfd-bc8f-4261-9357-30aeff5641e9", "patient", "danr@hotmail.com", false, "Dan", "Riley", false, null, null, null, null, null, false, null, false, "danr" },
+                    { new Guid("d5fb0a93-965c-430c-8328-e3fac8297796"), 0, "fbab5570-bbeb-4160-bbdc-52bf40364fb4", "doctor", "jacks@hotmail.com", false, "Jack", "Sackson", false, null, null, null, null, null, false, null, false, "jacks" },
+                    { new Guid("de14ae97-290b-4df0-9dcc-c54693de2f2b"), 0, "d84e623a-1335-4d0e-a1f5-1e1863c314f7", "doctor", "nickp@hotmail.com", false, "Nicholas", "Perkins", false, null, null, null, null, null, false, null, false, "nickp" },
+                    { new Guid("e4006c86-1bbc-4682-96f9-cddd007ba639"), 0, "d526c986-cec7-4f44-9dba-2deac04d9db4", "patient", "vanessar@hotmail.com", false, "Vanessa", "Reagan", false, null, null, null, null, null, false, null, false, "vanessar" }
                 });
 
             migrationBuilder.InsertData(
@@ -269,12 +300,12 @@ namespace planMyMDVisit.Migrations
                 columns: new[] { "Id", "Specialty", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("30efaa24-2c5b-476e-a702-57efb1e73fc5"), "Chiropractic", new Guid("1e6bed56-4cee-41ec-96c6-5dec5af09219") },
-                    { new Guid("79b3e4d7-b7b5-4f55-8f19-d14635f4280f"), "Dermatology", new Guid("7a833aa0-a684-4f19-87cf-6a97316e3e01") },
-                    { new Guid("ae59dc1a-1d42-453e-b9bd-c11a5296fa15"), "Cardiac Surgery", new Guid("f831e798-d700-48c6-a30d-405717da0630") },
-                    { new Guid("bac2e6be-6017-401a-a843-3ff62cb3b38c"), "Dermatology", new Guid("95c11752-0fb2-4ce4-99b6-8eb255701310") },
-                    { new Guid("e4a592cb-a0fd-4acc-8e6b-3cd6060a5717"), "Dermatology", new Guid("c273e0b0-3892-427b-8776-945b103ce234") },
-                    { new Guid("ee089eb7-b507-4e83-971d-ab6f64d2cdc2"), "Allergy", new Guid("eb0e38ce-93ec-4c4f-b559-200e943eb87a") }
+                    { new Guid("2202bda2-2fb6-4d3d-8e46-0138c69ed8d6"), "Dermatology", new Guid("78fd81f6-4f93-405a-9c8a-be2f4fe3cceb") },
+                    { new Guid("2e542e61-18a1-4268-9cc8-6306b846d2ea"), "Dermatology", new Guid("de14ae97-290b-4df0-9dcc-c54693de2f2b") },
+                    { new Guid("4768ec86-9fc6-4587-b037-ef1e83f913ab"), "Dermatology", new Guid("d5fb0a93-965c-430c-8328-e3fac8297796") },
+                    { new Guid("7e96f507-f7bc-46de-a40a-d1e8122b8ac7"), "Cardiac Surgery", new Guid("19905a09-5e24-4537-a73a-8cfd67f690ff") },
+                    { new Guid("bab27d98-34cc-4e93-80fc-2423e3a9c289"), "Chiropractic", new Guid("b0dead9b-bd5a-4195-b9a1-fdb09f9963b3") },
+                    { new Guid("da73c825-44d8-4eb3-92c2-c1acf6f8d6a1"), "Allergy", new Guid("c6c10c83-a67c-43fd-b82c-05adf1acd0c6") }
                 });
 
             migrationBuilder.InsertData(
@@ -282,12 +313,12 @@ namespace planMyMDVisit.Migrations
                 columns: new[] { "Id", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("148413d2-bded-4e00-b18c-92b221b21a60"), new Guid("eefa3bf8-2537-42dc-9620-e5f74763d7db") },
-                    { new Guid("1a80f6a9-bf87-4df9-842a-bad2a574a80d"), new Guid("f887f3ba-c206-4c06-9363-1f3596a7eae6") },
-                    { new Guid("5a024523-bdcd-4fd4-a450-20886808e612"), new Guid("2ee132bd-ccc1-453d-b420-436c53c0e388") },
-                    { new Guid("cae353a7-0b8f-4065-bfbd-5412e9fb139b"), new Guid("41766b94-419e-4a15-821a-7f5726be3704") },
-                    { new Guid("d63fdba3-9984-45d8-87f7-bfa979290445"), new Guid("0a7912f3-32a3-4d72-8806-cc1b463c0ad8") },
-                    { new Guid("e8303783-c127-463c-9120-3ab1efca7bdb"), new Guid("fac5316d-21ed-46c9-bf61-125d6ef3f3c6") }
+                    { new Guid("2ab2c6b8-0a57-4178-bbf1-4db18b40fa84"), new Guid("31b695b0-7202-496e-ae64-26f083e6f3b5") },
+                    { new Guid("3eaf37ec-26cd-4154-8e81-1b9b48adce8c"), new Guid("33a1a8b8-8fa7-42e4-8a14-63ff2ba07d27") },
+                    { new Guid("7427dbb3-24a1-4b39-85d3-9ad5dd8c9446"), new Guid("3a4df621-fc4d-4902-a11b-9fdf9937f832") },
+                    { new Guid("936a3df5-3a2d-45bf-b296-097c21c122b3"), new Guid("7a94bbe4-e529-47b6-9c95-86829197dfc7") },
+                    { new Guid("ef2c7b0b-d57a-40c6-951e-de43e8923612"), new Guid("e4006c86-1bbc-4682-96f9-cddd007ba639") },
+                    { new Guid("f8c44b63-ae05-4e00-aa49-1c7aff179a12"), new Guid("ae05bdf8-a24f-4918-b250-4d0b6a3ed2a5") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -378,6 +409,9 @@ namespace planMyMDVisit.Migrations
 
             migrationBuilder.DropTable(
                 name: "HealthCareTeams");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

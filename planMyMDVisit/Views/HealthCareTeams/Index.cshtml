@@ -1,9 +1,10 @@
 ﻿@using planMyMDVisit.Utilities;
-@model planMyMDVisit.Models.Domain.Patient
+@*@model planMyMDVisit.Models.Domain.Patient*@
+@model planMyMDVisit.Models.ViewModels.PatientEventViewModel
 
-@*<h4>My Care Team</h4>
+<h4>My Care Team</h4>
 
- <div class="row">
+@* <div class="row">
     <div class="col col-sm-12 card-container">
         @foreach (var hct in Helpers.TwoLatestCareTeams(Model))
         @for (var i = 0; i < 3; i++)
@@ -16,7 +17,7 @@
                     <p class="truncate">Date</p>
                 </div>
                 <div class="card-action">
-                    @hct.Doctor.Name
+                    @hct.Doctor.User.FullName
                     Doctor Name
                 </div>
             </div>
@@ -31,7 +32,7 @@
 
         <h4>Your Care Team</h4>
 
-        @foreach (var hct in Helpers.AllCareTeams(Model))
+        @foreach (var hct in Helpers.AllCareTeams(Model.Patient))
         {
             <div class="card blue lighten-5">
                 <div class="card-content black-text">
@@ -45,7 +46,6 @@
                 </div>
             </div>
         }
-
     </div>
 </div>
 

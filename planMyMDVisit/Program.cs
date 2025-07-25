@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using planMyMDVisit.Data;
@@ -19,9 +20,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<PlanMyMDVisitContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("MdVisitCon")));
+//.EnableSensitiveDataLogging());
 
-builder.Services.AddDbContext<AuthDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("MDauthCon")));
+builder.Logging.AddConsole();
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 {
@@ -82,9 +83,13 @@ app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("ht
 
 app.UseAuthorization();
 
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Patients}/{action=Show}/{id?}");
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Patients}/{action=Show}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 //using(var scope = app.Services.CreateScope())
 //{

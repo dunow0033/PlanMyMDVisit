@@ -6,16 +6,16 @@ namespace planMyMDVisit.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AuthDbContext authDbContext;
+        private readonly PlanMyMDVisitContext planMyMDContext;
 
-        public UserRepository(AuthDbContext authDbContext)
+        public UserRepository(PlanMyMDVisitContext planMyMDContext)
         {
-            this.authDbContext = authDbContext;
+            this.planMyMDContext = planMyMDContext;
         }
 
         public async Task<IEnumerable<IdentityUser>> GetAll()
         {
-            var users = await authDbContext.Users.ToListAsync();
+            var users = await planMyMDContext.Users.ToListAsync();
 
             //var superAdminUser = await authDbContext.Users
             //    .FirstOrDefaultAsync(x => x.Email == "superadmin@bloggie.com");

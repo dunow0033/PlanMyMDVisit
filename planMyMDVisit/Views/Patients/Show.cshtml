@@ -54,14 +54,14 @@
 <br />
 <br />
 
-<a asp-action="Index" asp-controller="HealthCareTeams" asp-route-patient="@Model.Patient" class="waves-effect waves-light btn btn-primary" style="width: 200px;">View All</a>
+<a asp-action="Index" asp-controller="HealthCareTeams" asp-route-patientId="@Model.Patient.Id" class="waves-effect waves-light btn btn-primary" style="width: 200px;">View All</a>
 
 <div class="row">
     <div class="col s12 m4 l4">
 
         <h5>Your Care Team</h5>
 
-       @* @foreach (var hct in Helpers.TwoLatestCareTeams(Model.Patient))
+       @foreach (var hct in Helpers.TwoLatestCareTeams(Model.Patient))
         {
             <div class="card blue lighten-5">
                 <div class="card-content black-text">
@@ -71,7 +71,7 @@
                     @hct.Doctor.User.FullName()
                 </div>
             </div>
-        } *@
+        }
 
         </div>
         

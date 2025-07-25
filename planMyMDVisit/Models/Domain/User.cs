@@ -11,10 +11,10 @@ namespace planMyMDVisit.Models.Domain
         //public virtual Doctor? Doctor { get; set; }
 
         //public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public override string Email { get; set; }
-        public string DoctorOrPatient { get; set; }
+        public string? DoctorOrPatient { get; set; }
 
         public virtual ICollection<Patient> Patients { get; set; } = new List<Patient>();
         public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();

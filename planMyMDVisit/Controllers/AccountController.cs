@@ -1,8 +1,10 @@
-﻿using planMyMDVisit.Models.ViewModels;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using planMyMDVisit.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using planMyMDVisit.Data;
+using planMyMDVisit.Models.Domain;
+using planMyMDVisit.Models.ViewModels;
 
 namespace planMyMDVisit.Controllers
 {
@@ -10,12 +12,15 @@ namespace planMyMDVisit.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AccountController(UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            IHttpContextAccessor httpContextAccessor)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -44,13 +49,26 @@ namespace planMyMDVisit.Controllers
                 {
                     var roleIdentityResult = await userManager.AddToRoleAsync(user, "User");
 
-                    if (roleIdentityResult.Succeeded)
+                    if(registerViewModel.DoctorOrPatient.ToLower() == "patient")
                     {
+                        var patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            UserId = user.Id
+                        };
+
+                        var dbContext = HttpContext.RequestServices.GetRequiredService<PlanMyMDVisitContext>();
+                        dbContext.Patients.Add(patient);
+                        await dbContext.SaveChangesAsync();
+                    }
+
+                    //if (roleIdentityResult.Succeeded)
+                    //{
                         //return RedirectToAction("Register");
                         await signInManager.SignInAsync(user, isPersistent: false);
 
                         return RedirectToAction("Show", "Patients");
-                    }
+                    //}
                 }
                 else
                 {
@@ -81,9 +99,21 @@ namespace planMyMDVisit.Controllers
                 return View();
             }
 
+            //var httpContext = _httpContextAccessor.HttpContext;
+
+            //foreach (var claim in httpContext.User.Claims)
+            //{
+            //    Console.WriteLine($"{claim.Type} = {claim.Value}");
+            //}
+
             var user = await userManager.FindByNameAsync(loginViewModel.UserName);
             //var user = await userManager.Users.Include(u => u.Patient)
             //    .FirstOrDefaultAsync(u => );
+
+            if (await userManager.IsInRoleAsync(user, "admin"))
+            {
+                return RedirectToAction("Show", "Admin");
+            }
 
             if (user == null)
             {
@@ -92,8 +122,16 @@ namespace planMyMDVisit.Controllers
                 return View(loginViewModel);
             }
 
-            var signInResult = await signInManager.PasswordSignInAsync(loginViewModel.UserName,
+            var signInResult = await signInManager.PasswordSignInAsync(
+                loginViewModel.UserName, 
                 loginViewModel.Password, false, false);
+
+            if (user != null && !signInResult.Succeeded)
+            {
+                //checking for incorrect password
+                ModelState.AddModelError(string.Empty, "Invalid password.");
+                return View(loginViewModel);
+            }
 
             if (signInResult != null && signInResult.Succeeded)
             {

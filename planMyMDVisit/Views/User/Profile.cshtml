@@ -1,21 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using planMyMDVisit.Models.Domain
 @model planMyMDVisit.Models.Domain.Patient
+@*@model planMyMDVisit.Models.ViewModels.PatientEventViewModel*@
 @inject SignInManager<User> signInManager
 
 @if (signInManager.IsSignedIn(User) && User.IsInRole("User"))
 {
     <h4>User Profile</h4>
     <b>Fullname: </b><b>@Model.User.FullName()</b>
-    <b>Username: </b><b>@Model.User.FullName()</b>
+    <b>Username: </b><b>@Model.User.UserName</b>
 }
 
-@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+@* @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <i>You are an admin</i>
 } else
 {
     <i>You are a patient</i>
-}
+} *@
 
 <a href="@Url.Action("Edit", "User")" class="btn btn-primary">Edit Profile</a>
