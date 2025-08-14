@@ -12,8 +12,8 @@ using planMyMDVisit.Data;
 namespace planMyMDVisit.Migrations
 {
     [DbContext(typeof(PlanMyMDVisitContext))]
-    [Migration("20250725020518_fixing admin again")]
-    partial class fixingadminagain
+    [Migration("20250725201126_initial seeding")]
+    partial class initialseeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,8 +71,8 @@ namespace planMyMDVisit.Migrations
                         new
                         {
                             Id = new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"),
-                            Name = "admin",
-                            NormalizedName = "Admin"
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -210,6 +210,13 @@ namespace planMyMDVisit.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"),
+                            RoleId = new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -253,39 +260,39 @@ namespace planMyMDVisit.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("da451dad-ac46-4d74-9bae-69ad16057ec7"),
+                            Id = new Guid("67d4f75a-d037-41ac-8352-e0c24e608351"),
                             Specialty = "Allergy",
-                            UserId = new Guid("adaab996-9cb1-420b-966e-08043cfbbf9f")
+                            UserId = new Guid("34ece4f0-e8b2-4d0e-952b-1c7c7f8be186")
                         },
                         new
                         {
-                            Id = new Guid("039ae53c-e632-49c8-b086-17cd2eef5962"),
+                            Id = new Guid("cd312da6-dbd5-4b14-aad6-a5342af2c1d2"),
                             Specialty = "Cardiac Surgery",
-                            UserId = new Guid("526b6e2b-3c82-4c8d-9599-58c329dabc08")
+                            UserId = new Guid("9952df63-4c05-4b03-a1e2-5dc85dd1e4b0")
                         },
                         new
                         {
-                            Id = new Guid("627e9014-aeda-4b79-a67b-e15f8a714f00"),
+                            Id = new Guid("8e4c588b-6d7f-454b-aece-30a404c2f224"),
                             Specialty = "Dermatology",
-                            UserId = new Guid("aecab71f-79a7-4265-b13f-ff76e833b370")
+                            UserId = new Guid("71a39b44-5b32-4302-9725-fb9999b19991")
                         },
                         new
                         {
-                            Id = new Guid("2fe9bd40-5801-4f53-bff2-499c1ed85438"),
+                            Id = new Guid("7c3b4d79-63e0-4129-af7e-87900753aabb"),
                             Specialty = "Dermatology",
-                            UserId = new Guid("b81eb3c1-bed1-4d41-90c1-1b3428dc7492")
+                            UserId = new Guid("60402d90-6abc-4da9-b20b-370c7df6876e")
                         },
                         new
                         {
-                            Id = new Guid("8d03cde7-7a38-47ea-ad7f-0b27f2eed675"),
+                            Id = new Guid("afd7c169-ea6f-43ca-b4f3-544e21f231b2"),
                             Specialty = "Chiropractic",
-                            UserId = new Guid("0e2ede5c-d8d3-423b-83e8-b13da520df9c")
+                            UserId = new Guid("fef64eab-8353-460e-ac94-bcc5d163e1d0")
                         },
                         new
                         {
-                            Id = new Guid("dc76db08-15d4-4a9f-84cf-08a768bc4b1a"),
+                            Id = new Guid("9cad0deb-bb69-4252-9032-a0c2efde1128"),
                             Specialty = "Dermatology",
-                            UserId = new Guid("5c82102b-ac17-4ec6-95e3-e8bfa2dc35c0")
+                            UserId = new Guid("4286ed8c-5415-4f8d-8567-970255e9c5e6")
                         });
                 });
 
@@ -335,33 +342,33 @@ namespace planMyMDVisit.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e5d9a825-7536-4fe4-8977-7d6ddb820b66"),
-                            UserId = new Guid("2d306ff7-1198-476d-abf4-4e584ca3f18e")
+                            Id = new Guid("2af6e876-6d39-4cfb-9f41-3abb85531d8c"),
+                            UserId = new Guid("2b0acab4-2c27-435b-98e4-769389ba7d4a")
                         },
                         new
                         {
-                            Id = new Guid("934de294-2b12-42b1-b9b9-8393e214e56c"),
-                            UserId = new Guid("231bc597-716d-4d2a-b9e3-10c0cf6e3dd3")
+                            Id = new Guid("8495bf28-def9-4856-ab4f-94e33f7b794f"),
+                            UserId = new Guid("f482edc9-de66-4268-ad44-71289b8b4eb8")
                         },
                         new
                         {
-                            Id = new Guid("920dff7e-8750-4bb9-9261-03c4b2143069"),
-                            UserId = new Guid("05718fd3-8a37-4d41-ae7d-1558cc1bb257")
+                            Id = new Guid("09ba6828-2823-43a1-abb5-760ab6353000"),
+                            UserId = new Guid("67ba71de-fb9b-4196-b0c2-37affeab44ac")
                         },
                         new
                         {
-                            Id = new Guid("f20645ae-f49e-4c27-bbc6-b900a54d01e8"),
-                            UserId = new Guid("e79b0f36-a642-44c0-afae-661336d7fcaf")
+                            Id = new Guid("d335511a-776c-4cb3-bbaf-d80daff466f7"),
+                            UserId = new Guid("25e98b4a-bc30-4ebf-a6a8-ec65f1bac448")
                         },
                         new
                         {
-                            Id = new Guid("738e2436-4b3b-4086-96d2-54026b6632b8"),
-                            UserId = new Guid("8f73ac20-a572-4fcb-a486-d29b49a77e85")
+                            Id = new Guid("55e49e3a-1d54-4bef-a2ad-d8fc288f1bed"),
+                            UserId = new Guid("aff6367d-37c5-4eb3-862b-2141fa51f87b")
                         },
                         new
                         {
-                            Id = new Guid("8eb7cab2-4022-4f24-8a67-9fad20ccfbe3"),
-                            UserId = new Guid("013624b8-db0f-4914-bb45-056dcc2fc9a4")
+                            Id = new Guid("33c261df-fea7-4f99-836a-178d3db9e781"),
+                            UserId = new Guid("655d0f9a-eae6-4261-be9f-e4130896b60a")
                         });
                 });
 
@@ -443,9 +450,9 @@ namespace planMyMDVisit.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2d306ff7-1198-476d-abf4-4e584ca3f18e"),
+                            Id = new Guid("2b0acab4-2c27-435b-98e4-769389ba7d4a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "831ece01-fecd-4792-bfe3-6da5326386b7",
+                            ConcurrencyStamp = "04283e59-b543-4d40-8ab0-1bd05f50e061",
                             DoctorOrPatient = "patient",
                             Email = "dannyt@hotmail.com",
                             EmailConfirmed = false,
@@ -458,9 +465,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("231bc597-716d-4d2a-b9e3-10c0cf6e3dd3"),
+                            Id = new Guid("f482edc9-de66-4268-ad44-71289b8b4eb8"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b204db06-8bf6-4c7d-97c9-34039b23949e",
+                            ConcurrencyStamp = "959f401a-e67a-4b4e-b84a-2ed0508a527c",
                             DoctorOrPatient = "patient",
                             Email = "vanessar@hotmail.com",
                             EmailConfirmed = false,
@@ -473,9 +480,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("05718fd3-8a37-4d41-ae7d-1558cc1bb257"),
+                            Id = new Guid("67ba71de-fb9b-4196-b0c2-37affeab44ac"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "67ac8a7d-1b72-4516-8359-4f1fa3735e03",
+                            ConcurrencyStamp = "835f64c3-86bc-48c8-8643-8fe19335f178",
                             DoctorOrPatient = "patient",
                             Email = "mikej@hotmail.com",
                             EmailConfirmed = false,
@@ -488,9 +495,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e79b0f36-a642-44c0-afae-661336d7fcaf"),
+                            Id = new Guid("25e98b4a-bc30-4ebf-a6a8-ec65f1bac448"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1513edbe-52d2-4024-bb1d-31aca10cf6bc",
+                            ConcurrencyStamp = "f3f93d4f-c5fd-4f45-be39-28492033ca39",
                             DoctorOrPatient = "patient",
                             Email = "helens@hotmail.com",
                             EmailConfirmed = false,
@@ -503,9 +510,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8f73ac20-a572-4fcb-a486-d29b49a77e85"),
+                            Id = new Guid("aff6367d-37c5-4eb3-862b-2141fa51f87b"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e6629662-6bc7-4c45-80bd-7d5bd8d9782f",
+                            ConcurrencyStamp = "3fc27e7d-a4d7-4fe0-8e5d-44a4ab6feb9f",
                             DoctorOrPatient = "patient",
                             Email = "bradc@hotmail.com",
                             EmailConfirmed = false,
@@ -518,9 +525,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("013624b8-db0f-4914-bb45-056dcc2fc9a4"),
+                            Id = new Guid("655d0f9a-eae6-4261-be9f-e4130896b60a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "883f353c-4dac-45f5-a42a-030f9b0cb275",
+                            ConcurrencyStamp = "c30d982e-927c-413b-97c6-f4702fdd92ac",
                             DoctorOrPatient = "patient",
                             Email = "rickn@hotmail.com",
                             EmailConfirmed = false,
@@ -533,9 +540,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("adaab996-9cb1-420b-966e-08043cfbbf9f"),
+                            Id = new Guid("34ece4f0-e8b2-4d0e-952b-1c7c7f8be186"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a417ec52-2fce-425a-9bae-302995ae0523",
+                            ConcurrencyStamp = "084a0802-a95e-4d8b-b813-6f3d203a7f01",
                             DoctorOrPatient = "patient",
                             Email = "danr@hotmail.com",
                             EmailConfirmed = false,
@@ -548,9 +555,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("526b6e2b-3c82-4c8d-9599-58c329dabc08"),
+                            Id = new Guid("9952df63-4c05-4b03-a1e2-5dc85dd1e4b0"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "12062b5c-ac21-4d06-ae9f-8f60e79ff359",
+                            ConcurrencyStamp = "59fac548-a0d5-4051-93ec-b47bfdaeb3e9",
                             DoctorOrPatient = "doctor",
                             Email = "path@hotmail.com",
                             EmailConfirmed = false,
@@ -563,9 +570,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aecab71f-79a7-4265-b13f-ff76e833b370"),
+                            Id = new Guid("71a39b44-5b32-4302-9725-fb9999b19991"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e0416a2a-9364-47d3-ab25-ee97d970a45f",
+                            ConcurrencyStamp = "6ae3e0e9-a21f-46d5-a25d-91cd8d398ddc",
                             DoctorOrPatient = "doctor",
                             Email = "timr@hotmail.com",
                             EmailConfirmed = false,
@@ -578,9 +585,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b81eb3c1-bed1-4d41-90c1-1b3428dc7492"),
+                            Id = new Guid("60402d90-6abc-4da9-b20b-370c7df6876e"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a54c05cf-3aeb-43ab-82c1-fbf5e7e36831",
+                            ConcurrencyStamp = "3c6512c6-4e21-4dde-8777-2803fa947728",
                             DoctorOrPatient = "doctor",
                             Email = "jacks@hotmail.com",
                             EmailConfirmed = false,
@@ -593,9 +600,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0e2ede5c-d8d3-423b-83e8-b13da520df9c"),
+                            Id = new Guid("fef64eab-8353-460e-ac94-bcc5d163e1d0"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1261663e-e142-41e3-a2c7-6162cc71d578",
+                            ConcurrencyStamp = "f2d476b5-e3bb-4230-a4ca-89ed1692a5fe",
                             DoctorOrPatient = "doctor",
                             Email = "samr@hotmail.com",
                             EmailConfirmed = false,
@@ -608,9 +615,9 @@ namespace planMyMDVisit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5c82102b-ac17-4ec6-95e3-e8bfa2dc35c0"),
+                            Id = new Guid("4286ed8c-5415-4f8d-8567-970255e9c5e6"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "247734fd-0753-44ef-9562-800b81c498fb",
+                            ConcurrencyStamp = "40df5904-c061-4594-addd-86914e0820ad",
                             DoctorOrPatient = "doctor",
                             Email = "nickp@hotmail.com",
                             EmailConfirmed = false,
@@ -625,15 +632,16 @@ namespace planMyMDVisit.Migrations
                         {
                             Id = new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5aa8ef93-ed15-46c0-8b24-14d0b22c2bf5",
+                            ConcurrencyStamp = "e7ddc449-7e25-4fb6-92aa-22dedd46b57b",
                             DoctorOrPatient = "admin",
                             Email = "admin@planMyMD.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@PLANMYMD.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFJwvTLFRUe8NaFwo85xDk7cVW6Epo0vLIudv0LsU3SHIWi2IKJPkpWOqY6zYhgpcw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAkqhomgyCwvbsDQoRLlxSwFlDtA8DJjnNmiynWMdhX1XApmnY+7pATvHO2tJtlyGw==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "289ca17c-e1bb-4597-9974-599d445d6b61",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

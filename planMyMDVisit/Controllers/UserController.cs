@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using planMyMDVisit.Models.Domain;
 using planMyMDVisit.Models.ViewModels;
 using planMyMDVisit.Repositories;
 

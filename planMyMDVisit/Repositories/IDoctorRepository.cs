@@ -17,5 +17,9 @@ namespace planMyMDVisit.Repositories
         Task<Guid?> GetDoctorGuidByName(string doctorName);
         Task<string> GetDoctorNameByID(Guid? doctorId);
         Task<string> GetPatientFullName();
+
+        Task<List<Doctor>> GetAllDoctors();
+
+        Task<Doctor> GetDoctorById(Guid id);
     }
 }

@@ -1,1 +1,59 @@
-﻿<h1>Hello Admin!!</h1>
+﻿@model planMyMDVisit.Models.ViewModels.AdminMainMenu
+
+<h2>Hello Admin!!</h2>
+
+@if(@ViewData["Success"] != null)
+{
+    <h1 class="text-success">@ViewData["Success"]</h1>   
+}
+else if(ViewData["Error"] != null)
+{
+    <h1 class="text-danger">@ViewData["Error"]</h1>
+}
+
+<label class="control-label">Specialty</label>
+
+<form asp-controller="Admin" id="userTypeList" class="form-control">
+    <select id="userTypeSelect" class="form-control">
+        <option value="all" selected>All Users</option>
+        <option value="doctors">Doctors</option>
+        <option value="patients">Patients</option>
+    </select>
+
+    <!--<span asp-validation-for="Specialty" class="text-danger"></span>
+
+    <!--<button type="submit" class="btn btn-primary">Next</button>-->
+</form>
+
+<br />
+<br />
+
+<a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="CreateUser">Create New User</a>
+
+<br />
+<br />
+
+<a class="waves-effect waves-light btn btn-primary" asp-area="" asp-controller="Patients" asp-action="Show">Main Page</a>
+
+<br />
+<br />
+
+<div id="userListContainer">
+    @{ await Html.RenderPartialAsync("_UserListPartial", Model); }
+</div>
+
+
+@section Scripts {
+    
+    <script>
+        document.getElementById("userTypeSelect").addEventListener("change", function () {
+            const selected = this.value;
+
+            fetch(`/Admin/FilterUsers?type=${selected}`)
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("userListContainer").innerHTML = html;
+                });
+        });
+    </script>
+}

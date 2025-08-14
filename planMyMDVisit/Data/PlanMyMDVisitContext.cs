@@ -18,7 +18,7 @@ namespace planMyMDVisit.Data
 
         public DbSet<Patient> Patients { get; set; }
 
-        public DbSet<IdentityUser> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -208,8 +208,8 @@ namespace planMyMDVisit.Data
                 new IdentityRole<Guid>
                 {
                     Id = adminId,
-                    Name = "admin",
-                    NormalizedName = "Admin",    
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",    
                 }
             );
 
@@ -219,8 +219,8 @@ namespace planMyMDVisit.Data
                 UserName = "admin",
                 Email = "admin@planMyMD.com",
                 DoctorOrPatient = "admin",
-                NormalizedEmail = "admin@planMyMD.com".ToUpper(),
-                NormalizedUserName = "admin".ToUpper(),
+                NormalizedEmail = "ADMIN@PLANMYMD.COM",
+                NormalizedUserName = "ADMIN",
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 

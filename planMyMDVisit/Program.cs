@@ -36,7 +36,8 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 })
     .AddEntityFrameworkStores<PlanMyMDVisitContext>()
     .AddRoles<IdentityRole<Guid>>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<User, IdentityRole<Guid>>>();
 
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
@@ -53,7 +54,7 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-    var roles = new[] { "User" };
+    var roles = new[] { "User", "Admin" };
 
     foreach (var role in roles)
     {
@@ -75,11 +76,14 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:7189"));
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -1,0 +1,28 @@
+﻿@model planMyMDVisit.Models.ViewModels.AdminMainMenu
+
+@if(Model.Users != null && Model.Users.Any())
+{
+    
+        @foreach(var user in Model.Users)
+        {
+            <li class="list-group-item">@user.FullName()</li>
+        }
+}
+else if (Model.Doctors != null && Model.Doctors.Any())
+{
+    <ul class="list-group">
+        @foreach (var user in Model.Doctors)
+        {
+            <li class="list-group-item"><a href="@Url.Action("Doctor", "Admin", new { id = user.Id })">@user.User.FullName()</a></li>
+        }
+    </ul>
+}
+else if (Model.Patients != null && Model.Patients.Any())
+{
+    <ul class="list-group">
+        @foreach (var user in Model.Patients)
+        {
+            <li class="list-group-item"><a href="@Url.Action("Patient", "Admin", new { id = user.Id })">@user.User.FullName()</a></li>
+        }
+    </ul>
+}

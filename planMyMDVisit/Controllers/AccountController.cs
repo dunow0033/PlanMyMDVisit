@@ -110,7 +110,7 @@ namespace planMyMDVisit.Controllers
             //var user = await userManager.Users.Include(u => u.Patient)
             //    .FirstOrDefaultAsync(u => );
 
-            if (await userManager.IsInRoleAsync(user, "admin"))
+            if (await userManager.IsInRoleAsync(user, "Admin"))
             {
                 return RedirectToAction("Show", "Admin");
             }

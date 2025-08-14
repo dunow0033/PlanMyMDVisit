@@ -1,0 +1,162 @@
+﻿@model planMyMDVisit.Models.Domain.User
+
+<h4>User Profile containing info on either patient or doctor</h4>
+<b>Fullname: </b><i>@Model.FullName()</i>
+<br>
+<b>Username: </b><i>@Model.UserName</i>
+<br>
+<b>Email: </b><i>@Model.Email</i>
+<br>
+<b>Admin: </b><i>@(Model.Admin ? "Yes" : "No")</i>
+<br>
+<br>
+<a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="EditUser" asp-route-id="@Model.Id">Edit Profile</a>
+
+<br>
+<br>
+<button type="button" class="btn btn-danger delete-item" data-toggle="modal" data-target="#deleteConfirmationModal" data-id="@Model.Id">Delete User</button>
+
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this user? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var patient = Model.Patients.FirstOrDefault();
+}
+
+@if(patient != null)
+{
+    
+}
+
+<script>
+    $(document).ready(function () {
+            var itemIdToDelete;
+
+            $('.delete-item').on('click', function () {
+                const userId = $(this).data('id');
+                const userName = $(this.data('name');
+
+                $('#')
+            });
+
+            $('#confirmDeleteButton').on('click', function () {
+                // Send AJAX request to delete the item
+                $.ajax({
+                    url: '/Admin/DeletePatient',
+                    type: 'POST',
+                    data: { id: "@Model.Id" },
+                    success: function (result) {
+                        // Handle success (e.g., refresh the page, remove the item from the UI)
+                        $('#deleteConfirmationModal').modal('hide');
+                        // Example: Reload the page
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error("Error deleting item:", error);
+                    }
+                });
+            });
+        });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+@*<%= button_to "Delete User", [:admin, @user], method: :delete, data: {confirm: "Are you sure?"}, class: "waves-effect waves-light btn" %>
+
+
+<% if @patient = @user.patient %>
+<h4>Patient Information</h4>
+
+<b>Medical Records: </b><%= @patient.medical_record %>
+<br>
+<b>Test Results: </b><%= @patient.test_results %>
+<br>
+<b>Medications: </b><%= @patient.medications %>
+<br>
+<br>
+    <%= link_to "Edit Patient Information", edit_admin_patient_path(@patient), class: "waves-effect waves-light btn" %>
+
+<h4>Care Teams</h4>
+
+<div class="row">
+    <div class="col s12 cards-container">
+        <% @patient.healthcare_teams.each do |care_team| %>
+        <div class="card blue lighten-5">
+            <div class="card-content black-text">
+                <span class="card-title"><%= care_team.doctor.specialty %></span>
+                <p>
+                    <%= care_team.doctor.fullname %><br>
+                    <%= date_time(care_team.appointment) %>
+                </p>
+            </div>
+            <div class="card-action" align="center">
+                <%= link_to "Edit Care Team", edit_admin_healthcare_team_path(care_team), class: "waves-effect waves-light btn" %>
+                <br><br>
+                <%= button_to "Delete Care Team", [:admin, care_team], method: :delete, data: {confirm: "Are you sure?"}, params: { 'user_id' => @patient.user }, class: "waves-effect waves-light btn" %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+
+<% elsif @doctor = @user.doctor %>
+<h4>Doctor Information</h4>
+
+<b>Gender: </b><%= @doctor.gender %>
+<br>
+<b>Specialty: </b><%= @doctor.specialty %>
+<br>
+<b>Hospital: </b><%= @doctor.hospital %>
+<br>
+<b>Address: </b><%= @doctor.address %>
+<br>
+<b>City: </b><%= @doctor.city %>
+<br>
+<b>State: </b><%= @doctor.state %>
+<br>
+<b>Zipcode: </b><%= @doctor.zipcode %>
+<br>
+<br>
+    <%= link_to "Edit Doctor Information", edit_admin_doctor_path(@doctor), class: "waves-effect waves-light btn" %>
+
+<h4>Patient Lists</h4>
+
+<div class="row">
+    <div class="col s12 cards-container">
+        <% @doctor.healthcare_teams.each do |care_team| %>
+        <div class="card blue lighten-5">
+            <div class="card-content black-text">
+                <span class="card-title"><%= care_team.patient.fullname %></span>
+                <p><%= date_time(care_team.appointment) %></p>
+            </div>
+            <div class="card-action" align="center">
+                <%= link_to "Edit Patient Medical Chart", edit_admin_healthcare_team_path(care_team), class: "waves-effect waves-light btn" %>
+                <br><br>
+                <%= button_to "Delete Care Team", [:admin, care_team], method: :delete, data: {confirm: "Are you sure?"}, params: { 'user_id' => @doctor.user }, class: "waves-effect waves-light btn" %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+<% end %>
+ *@

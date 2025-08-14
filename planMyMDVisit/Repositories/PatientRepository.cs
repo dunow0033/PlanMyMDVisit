@@ -1,21 +1,26 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using planMyMDVisit.Data;
 using planMyMDVisit.Models.Domain;
+using planMyMDVisit.Models.ViewModels;
 using System.Net.Http;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace planMyMDVisit.Repositories
 {
     public class PatientRepository : IPatientRepository
     {
         private readonly PlanMyMDVisitContext planMyMDVisitDBContext;
+        private readonly UserManager<User> userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PatientRepository(PlanMyMDVisitContext planMyMDVisitDBContext, IHttpContextAccessor httpContextAccessor)
+        public PatientRepository(UserManager<User> userManager, PlanMyMDVisitContext planMyMDVisitDBContext, IHttpContextAccessor httpContextAccessor)
         {
             this.planMyMDVisitDBContext = planMyMDVisitDBContext;
-            _httpContextAccessor = httpContextAccessor;
+            this._httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
         }
 
         public async Task<Guid?> GetCurrentPatientID()
@@ -112,6 +117,67 @@ namespace planMyMDVisit.Repositories
             }
 
             return patientToFind.Id;
+        }
+
+        public async Task<List<Patient>> GetAllPatients()
+        {
+            return await planMyMDVisitDBContext.Patients
+                .Include(d => d.User)
+                .ToListAsync();
+        }
+
+        public async Task<Patient> GetPatientById(Guid id)
+        {
+            return await planMyMDVisitDBContext.Patients
+                .Include(p => p.User)
+                .Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+        
+        public async Task<Patient?> UpdateAsync(Guid patientId, EditUserViewModel eVM, string? NewPassword)
+        {
+            var existingPatient = await planMyMDVisitDBContext.Patients
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(x => x.Id == patientId);
+
+            if (existingPatient == null)
+                return null;
+            
+            //existingPatient.Id = eVM.Id;
+            existingPatient.User.FirstName = eVM.FirstName;
+            existingPatient.User.LastName = eVM.LastName;
+            existingPatient.User.UserName = eVM.UserName;
+            existingPatient.User.Email = eVM.Email;
+
+                if(!string.IsNullOrWhiteSpace(NewPassword))
+                {
+                    var token = await userManager.GeneratePasswordResetTokenAsync(existingPatient.User);
+                    var result = await userManager.ResetPasswordAsync(existingPatient.User, token, NewPassword);
+
+                    if (!result.Succeeded)
+                    {
+                        return null;
+                    }
+                }
+              
+                await planMyMDVisitDBContext.SaveChangesAsync();
+                return existingPatient;
+        }
+
+        public async Task<Patient?> DeleteAsync(Guid patientId)
+        {
+            var existingPatient = await planMyMDVisitDBContext.Patients
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(x => x.Id == patientId);
+
+            if (existingPatient != null)
+            { 
+                planMyMDVisitDBContext.Remove(existingPatient);
+                await planMyMDVisitDBContext.SaveChangesAsync();
+
+                return existingPatient;
+            }
+
+            return null;
         }
     }
 }

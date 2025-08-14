@@ -1,0 +1,63 @@
+﻿@model planMyMDVisit.Models.Domain.Patient
+
+<h4>Edit Care Team Information</h4>
+
+<form asp-controller="Admin" asp-action="EditHealthCareTeamInfo" method="post">
+    <h1>Hello Editing Patient HealthCare Stuff!!</h1>
+
+   @*  @foreach (var hct in Model)
+    {
+        <b>Patient Name: </b>       @hct.Patient.User.FullName()
+        <b>Doctor Name: </b>        @hct.Doctor.User.FullName()*@
+
+       @*  <div>
+            <label for="appointment"></label>
+            <input type="text" id="apppointment" />
+        </div>
+
+        <div>
+            <label for="testResult"></label>
+            <textarea name="testResult" id="testResult" rows="5" cols="40" placeholder="Enter patient test result here..."></textarea>
+        </div>
+
+        <div>
+            <label for="treatmentPlans" />
+            <textarea name="treatmentPlans" id="treatmentPlans" rows="5" cols="40" placeholder="Enter patient treatment plans here..."></textarea>
+        </div>
+
+        <div>
+            <label for="prescriptions" />
+            <textarea name="prescriptions" id="prescriptions" rows="5" cols="40" placeholder="Enter patient prescriptions here..."></textarea>
+        </div>
+
+         <div>
+            <label for="billing" />
+            <textarea name="billing" id="billing" rows="5" cols="40" placeholder="Enter billing details here..."></textarea>
+        </div> *@
+    @* } *@
+
+     <div>
+        <button type="submit" class="waves-effect waves-light btn">Update Care Team</button>
+    </div>
+</form>
+
+<a class="btn btn-primary" 
+    asp-controller="Admin" 
+    asp-action="Patient" 
+    asp-route-id="@Model.Id">Back to Patient's Profile</a>
+
+<br />
+<br />
+
+<button class="btn btn-primary">Back to Doctor's Profile</button>
+
+<br>
+@*
+<"Back to Patient's Profile", admin_user_path(@healthcare_team.patient.user), class: "waves-effect waves-light btn"
+
+<br><br>
+
+<button>link_to "Back to Doctor's Profile", admin_user_path(@healthcare_team.doctor.user), class: "waves-effect waves-light btn"</button> */
+*@
+
+<br><br>

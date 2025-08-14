@@ -1,0 +1,62 @@
+﻿<h4>Edit Patient Information </h4>
+
+<form asp-controller="Admin" asp-action="EditPatientInfo" method="post" class="form-control">
+
+   @*  <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label for="lastName">First Name</label>
+        <input type="text" asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div>
+        <label for="lastName">Last Name</label>
+        <input type="text" asp-for="LastName" class="form-control" />
+    </div>
+
+    <div>
+        <label for="userName">Username</label>
+        <input type="text" asp-for="UserName" class="form-control" />
+    </div>
+
+    <div>
+        <label for="email">Email</label>
+        <input type="text" asp-for="Email" class="form-control" />
+    </div>
+
+
+
+
+
+
+
+<div>
+    <%= f.label :medical_record, "Medical and Surgical Histories" %>
+    <%= f.text_area :medical_record %>
+</div>
+
+<div>
+    <%= f.label :test_results, "Test Results" %>
+    <%= f.text_area :test_results %>
+</div>
+
+<div>
+    <%= f.label :medications, "Prescription and Non-Prescription Medications" %>
+    <%= f.text_area :medications %>
+</div>
+
+<br>
+    Patient Information was created at <%= date_and_time(@patient.created_at) %>
+<br>
+    Patient Information was updated at <%= date_and_time(@patient.updated_at) %>
+<br>
+<br>
+
+<div>
+    <%= f.submit "Update Patient Information", class: "waves-effect waves-light btn" %>
+</div> *@
+
+   <div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+</form>

@@ -11,6 +11,7 @@ namespace planMyMDVisit.Models.Domain
         //public virtual Doctor? Doctor { get; set; }
 
         //public string UserName { get; set; }
+        public bool Admin { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public override string Email { get; set; }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace planMyMDVisit.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class initialseeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -273,39 +273,44 @@ namespace planMyMDVisit.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"), null, "admin", "Admin" });
+                values: new object[] { new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"), null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DoctorOrPatient", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("19905a09-5e24-4537-a73a-8cfd67f690ff"), 0, "0ba6f472-f769-4431-b992-7a4bd04ebe27", "doctor", "path@hotmail.com", false, "Patrick", "Hordner", false, null, null, null, null, null, false, null, false, "path" },
-                    { new Guid("31b695b0-7202-496e-ae64-26f083e6f3b5"), 0, "217a87ff-ef95-47a9-8733-4c39b16254f8", "patient", "dannyt@hotmail.com", false, "Danny", "Tonner", false, null, null, null, null, null, false, null, false, "dannyt" },
-                    { new Guid("33a1a8b8-8fa7-42e4-8a14-63ff2ba07d27"), 0, "be2fdd38-5c73-4fe2-81a6-cf348b797253", "patient", "mikej@hotmail.com", false, "Mike", "Johnson", false, null, null, null, null, null, false, null, false, "mikej" },
-                    { new Guid("3a4df621-fc4d-4902-a11b-9fdf9937f832"), 0, "f5aca1e0-72f8-4b3f-b915-6fb12ce86142", "patient", "bradc@hotmail.com", false, "Brad", "Connors", false, null, null, null, null, null, false, null, false, "bradc" },
-                    { new Guid("78fd81f6-4f93-405a-9c8a-be2f4fe3cceb"), 0, "311df731-c22c-4c74-91af-fed6d617febd", "doctor", "timr@hotmail.com", false, "Timmy", "Rudner", false, null, null, null, null, null, false, null, false, "timr" },
-                    { new Guid("7a94bbe4-e529-47b6-9c95-86829197dfc7"), 0, "c25ed1cc-02fc-4523-a51b-4b56e791554a", "patient", "helens@hotmail.com", false, "Helen", "Skyburgh", false, null, null, null, null, null, false, null, false, "helens" },
-                    { new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"), 0, "e54b0c92-30c9-4a20-a907-11e90656a3ac", null, "admin@planMyMD.com", false, null, null, false, null, "ADMIN@PLANMYMD.COM", "ADMIN@PLANMYMD.COM", "AQAAAAIAAYagAAAAEEJB3sxMD1lN+JcPyFE/ACU/J7QKkUCbSUZj5yEOXXvjFCoTyN5vaYDj+/ywFSiZQA==", null, false, null, false, "admin" },
-                    { new Guid("ae05bdf8-a24f-4918-b250-4d0b6a3ed2a5"), 0, "761c94bd-05a3-4a9f-9a9e-246637ce0543", "patient", "rickn@hotmail.com", false, "Rick", "Nyburgh", false, null, null, null, null, null, false, null, false, "rickn" },
-                    { new Guid("b0dead9b-bd5a-4195-b9a1-fdb09f9963b3"), 0, "aa81b439-4b12-4825-b001-52bf23160dd7", "doctor", "samr@hotmail.com", false, "Sammy", "Rostun", false, null, null, null, null, null, false, null, false, "samr" },
-                    { new Guid("c6c10c83-a67c-43fd-b82c-05adf1acd0c6"), 0, "385fbcfd-bc8f-4261-9357-30aeff5641e9", "patient", "danr@hotmail.com", false, "Dan", "Riley", false, null, null, null, null, null, false, null, false, "danr" },
-                    { new Guid("d5fb0a93-965c-430c-8328-e3fac8297796"), 0, "fbab5570-bbeb-4160-bbdc-52bf40364fb4", "doctor", "jacks@hotmail.com", false, "Jack", "Sackson", false, null, null, null, null, null, false, null, false, "jacks" },
-                    { new Guid("de14ae97-290b-4df0-9dcc-c54693de2f2b"), 0, "d84e623a-1335-4d0e-a1f5-1e1863c314f7", "doctor", "nickp@hotmail.com", false, "Nicholas", "Perkins", false, null, null, null, null, null, false, null, false, "nickp" },
-                    { new Guid("e4006c86-1bbc-4682-96f9-cddd007ba639"), 0, "d526c986-cec7-4f44-9dba-2deac04d9db4", "patient", "vanessar@hotmail.com", false, "Vanessa", "Reagan", false, null, null, null, null, null, false, null, false, "vanessar" }
+                    { new Guid("25e98b4a-bc30-4ebf-a6a8-ec65f1bac448"), 0, "f3f93d4f-c5fd-4f45-be39-28492033ca39", "patient", "helens@hotmail.com", false, "Helen", "Skyburgh", false, null, null, null, null, null, false, null, false, "helens" },
+                    { new Guid("2b0acab4-2c27-435b-98e4-769389ba7d4a"), 0, "04283e59-b543-4d40-8ab0-1bd05f50e061", "patient", "dannyt@hotmail.com", false, "Danny", "Tonner", false, null, null, null, null, null, false, null, false, "dannyt" },
+                    { new Guid("34ece4f0-e8b2-4d0e-952b-1c7c7f8be186"), 0, "084a0802-a95e-4d8b-b813-6f3d203a7f01", "patient", "danr@hotmail.com", false, "Dan", "Riley", false, null, null, null, null, null, false, null, false, "danr" },
+                    { new Guid("4286ed8c-5415-4f8d-8567-970255e9c5e6"), 0, "40df5904-c061-4594-addd-86914e0820ad", "doctor", "nickp@hotmail.com", false, "Nicholas", "Perkins", false, null, null, null, null, null, false, null, false, "nickp" },
+                    { new Guid("60402d90-6abc-4da9-b20b-370c7df6876e"), 0, "3c6512c6-4e21-4dde-8777-2803fa947728", "doctor", "jacks@hotmail.com", false, "Jack", "Sackson", false, null, null, null, null, null, false, null, false, "jacks" },
+                    { new Guid("655d0f9a-eae6-4261-be9f-e4130896b60a"), 0, "c30d982e-927c-413b-97c6-f4702fdd92ac", "patient", "rickn@hotmail.com", false, "Rick", "Nyburgh", false, null, null, null, null, null, false, null, false, "rickn" },
+                    { new Guid("67ba71de-fb9b-4196-b0c2-37affeab44ac"), 0, "835f64c3-86bc-48c8-8643-8fe19335f178", "patient", "mikej@hotmail.com", false, "Mike", "Johnson", false, null, null, null, null, null, false, null, false, "mikej" },
+                    { new Guid("71a39b44-5b32-4302-9725-fb9999b19991"), 0, "6ae3e0e9-a21f-46d5-a25d-91cd8d398ddc", "doctor", "timr@hotmail.com", false, "Timmy", "Rudner", false, null, null, null, null, null, false, null, false, "timr" },
+                    { new Guid("9952df63-4c05-4b03-a1e2-5dc85dd1e4b0"), 0, "59fac548-a0d5-4051-93ec-b47bfdaeb3e9", "doctor", "path@hotmail.com", false, "Patrick", "Hordner", false, null, null, null, null, null, false, null, false, "path" },
+                    { new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"), 0, "e7ddc449-7e25-4fb6-92aa-22dedd46b57b", "admin", "admin@planMyMD.com", false, null, null, false, null, "ADMIN@PLANMYMD.COM", "ADMIN", "AQAAAAIAAYagAAAAEAkqhomgyCwvbsDQoRLlxSwFlDtA8DJjnNmiynWMdhX1XApmnY+7pATvHO2tJtlyGw==", null, false, "289ca17c-e1bb-4597-9974-599d445d6b61", false, "admin" },
+                    { new Guid("aff6367d-37c5-4eb3-862b-2141fa51f87b"), 0, "3fc27e7d-a4d7-4fe0-8e5d-44a4ab6feb9f", "patient", "bradc@hotmail.com", false, "Brad", "Connors", false, null, null, null, null, null, false, null, false, "bradc" },
+                    { new Guid("f482edc9-de66-4268-ad44-71289b8b4eb8"), 0, "959f401a-e67a-4b4e-b84a-2ed0508a527c", "patient", "vanessar@hotmail.com", false, "Vanessa", "Reagan", false, null, null, null, null, null, false, null, false, "vanessar" },
+                    { new Guid("fef64eab-8353-460e-ac94-bcc5d163e1d0"), 0, "f2d476b5-e3bb-4230-a4ca-89ed1692a5fe", "doctor", "samr@hotmail.com", false, "Sammy", "Rostun", false, null, null, null, null, null, false, null, false, "samr" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d"), new Guid("a0cab2c3-6558-4a1c-be81-dfb39180da3d") });
 
             migrationBuilder.InsertData(
                 table: "Doctors",
                 columns: new[] { "Id", "Specialty", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("2202bda2-2fb6-4d3d-8e46-0138c69ed8d6"), "Dermatology", new Guid("78fd81f6-4f93-405a-9c8a-be2f4fe3cceb") },
-                    { new Guid("2e542e61-18a1-4268-9cc8-6306b846d2ea"), "Dermatology", new Guid("de14ae97-290b-4df0-9dcc-c54693de2f2b") },
-                    { new Guid("4768ec86-9fc6-4587-b037-ef1e83f913ab"), "Dermatology", new Guid("d5fb0a93-965c-430c-8328-e3fac8297796") },
-                    { new Guid("7e96f507-f7bc-46de-a40a-d1e8122b8ac7"), "Cardiac Surgery", new Guid("19905a09-5e24-4537-a73a-8cfd67f690ff") },
-                    { new Guid("bab27d98-34cc-4e93-80fc-2423e3a9c289"), "Chiropractic", new Guid("b0dead9b-bd5a-4195-b9a1-fdb09f9963b3") },
-                    { new Guid("da73c825-44d8-4eb3-92c2-c1acf6f8d6a1"), "Allergy", new Guid("c6c10c83-a67c-43fd-b82c-05adf1acd0c6") }
+                    { new Guid("67d4f75a-d037-41ac-8352-e0c24e608351"), "Allergy", new Guid("34ece4f0-e8b2-4d0e-952b-1c7c7f8be186") },
+                    { new Guid("7c3b4d79-63e0-4129-af7e-87900753aabb"), "Dermatology", new Guid("60402d90-6abc-4da9-b20b-370c7df6876e") },
+                    { new Guid("8e4c588b-6d7f-454b-aece-30a404c2f224"), "Dermatology", new Guid("71a39b44-5b32-4302-9725-fb9999b19991") },
+                    { new Guid("9cad0deb-bb69-4252-9032-a0c2efde1128"), "Dermatology", new Guid("4286ed8c-5415-4f8d-8567-970255e9c5e6") },
+                    { new Guid("afd7c169-ea6f-43ca-b4f3-544e21f231b2"), "Chiropractic", new Guid("fef64eab-8353-460e-ac94-bcc5d163e1d0") },
+                    { new Guid("cd312da6-dbd5-4b14-aad6-a5342af2c1d2"), "Cardiac Surgery", new Guid("9952df63-4c05-4b03-a1e2-5dc85dd1e4b0") }
                 });
 
             migrationBuilder.InsertData(
@@ -313,12 +318,12 @@ namespace planMyMDVisit.Migrations
                 columns: new[] { "Id", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("2ab2c6b8-0a57-4178-bbf1-4db18b40fa84"), new Guid("31b695b0-7202-496e-ae64-26f083e6f3b5") },
-                    { new Guid("3eaf37ec-26cd-4154-8e81-1b9b48adce8c"), new Guid("33a1a8b8-8fa7-42e4-8a14-63ff2ba07d27") },
-                    { new Guid("7427dbb3-24a1-4b39-85d3-9ad5dd8c9446"), new Guid("3a4df621-fc4d-4902-a11b-9fdf9937f832") },
-                    { new Guid("936a3df5-3a2d-45bf-b296-097c21c122b3"), new Guid("7a94bbe4-e529-47b6-9c95-86829197dfc7") },
-                    { new Guid("ef2c7b0b-d57a-40c6-951e-de43e8923612"), new Guid("e4006c86-1bbc-4682-96f9-cddd007ba639") },
-                    { new Guid("f8c44b63-ae05-4e00-aa49-1c7aff179a12"), new Guid("ae05bdf8-a24f-4918-b250-4d0b6a3ed2a5") }
+                    { new Guid("09ba6828-2823-43a1-abb5-760ab6353000"), new Guid("67ba71de-fb9b-4196-b0c2-37affeab44ac") },
+                    { new Guid("2af6e876-6d39-4cfb-9f41-3abb85531d8c"), new Guid("2b0acab4-2c27-435b-98e4-769389ba7d4a") },
+                    { new Guid("33c261df-fea7-4f99-836a-178d3db9e781"), new Guid("655d0f9a-eae6-4261-be9f-e4130896b60a") },
+                    { new Guid("55e49e3a-1d54-4bef-a2ad-d8fc288f1bed"), new Guid("aff6367d-37c5-4eb3-862b-2141fa51f87b") },
+                    { new Guid("8495bf28-def9-4856-ab4f-94e33f7b794f"), new Guid("f482edc9-de66-4268-ad44-71289b8b4eb8") },
+                    { new Guid("d335511a-776c-4cb3-bbaf-d80daff466f7"), new Guid("25e98b4a-bc30-4ebf-a6a8-ec65f1bac448") }
                 });
 
             migrationBuilder.CreateIndex(

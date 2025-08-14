@@ -1,0 +1,37 @@
+﻿@model planMyMDVisit.Models.ViewModels.EditUserViewModel
+
+@{
+    ViewData["Name"] = ViewData["Name"];
+}
+
+<form asp-controller="Admin" asp-action="EditPatient" method="post" class="form-control">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label for="lastName">First Name</label>
+        <input type="text" asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div>
+        <label for="lastName">Last Name</label>
+        <input type="text" asp-for="LastName" class="form-control" />
+    </div>
+
+    <div>
+        <label for="userName">Username</label>
+        <input type="text" asp-for="UserName" class="form-control" />
+    </div>
+
+    <div>
+        <label for="email">Email</label>
+        <input type="text" asp-for="Email" class="form-control" />
+    </div>
+
+    <div>
+        <label for="NewPassword">Password</label>
+        <input type="password" asp-for="NewPassword" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

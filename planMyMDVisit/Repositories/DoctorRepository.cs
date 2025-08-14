@@ -107,6 +107,27 @@ namespace planMyMDVisit.Repositories
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<List<Doctor>> GetAllDoctors()
+        {
+            return await planMyMDVisitDBContext.Doctors
+                .Include(d => d.User)
+                .ToListAsync();
+        }
+
+        public async Task<Doctor> GetDoctorById(Guid id)
+        {
+            return await planMyMDVisitDBContext.Doctors
+                .Include(p => p.User)
+                .Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        //public List<Doctor> AllDoctorsList()
+        //{
+        //    return planMyMDVisitDBContext.Doctors
+        //        .Include(d => d.User)
+        //        .ToList();
+        //}
+
         //public async Task<Doctor?> GetByIdAsync(Guid id)
         //{
         //    return await planMyMDVisitDBContext.Doctors
