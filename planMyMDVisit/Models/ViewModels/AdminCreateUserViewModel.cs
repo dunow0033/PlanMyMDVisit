@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using planMyMDVisit.Models.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace planMyMDVisit.Models.ViewModels
 {
@@ -16,6 +17,7 @@ namespace planMyMDVisit.Models.ViewModels
         [Required]
         [Display(Name = "Role")]
         public string DoctorOrPatient { get; set; }
+        public Patient Patient { get; set; }
 
         [Required]
         [Display(Name = "AdminOrRegularUser")]

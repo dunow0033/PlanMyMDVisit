@@ -1,0 +1,24 @@
+﻿@model IEnumerable<planMyMDVisit.Models.Domain.Patient>
+@using planMyMDVisit.Utilities
+
+<h2>Patients</h2>
+
+@if (!Model.Any())
+{
+    <p>No patients found.</p>
+}
+else
+{
+    @foreach (var patient in Model.OrderBy(p => p.User.LastName))
+    {
+        <div>
+            <strong>
+                <a asp-controller="Admin"
+                   asp-action="UserProfile"
+                   asp-route-id="@patient.UserId">
+                    @patient.User.FullName()
+                </a>
+            </strong>
+        </div>
+    }
+}

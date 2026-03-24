@@ -117,8 +117,8 @@ namespace planMyMDVisit.Repositories
         public async Task<Doctor> GetDoctorById(Guid id)
         {
             return await planMyMDVisitDBContext.Doctors
-                .Include(p => p.User)
-                .Where(p => p.Id == id).FirstOrDefaultAsync();
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(d => d.Id == id);
         }
 
         //public List<Doctor> AllDoctorsList()

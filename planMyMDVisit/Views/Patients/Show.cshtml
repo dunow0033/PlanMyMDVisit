@@ -49,12 +49,14 @@
 
 <p><strong>plan my MD visit</strong> is not for use in emergencies or for messages that require immediate attention. For medical or psychiatric emergencies, call 911 or go to the nearest hospital.</p>
 
-<a asp-action="NewAppt" asp-controller="HealthCareTeams" class="waves-effect waves-light btn btn-primary" style="width: 200px;">Schedule an Appointment</a>
+<a asp-action="NewAppt" asp-controller="HealthCareTeams" 
+            class="waves-effect waves-light btn btn-primary" 
+            style="width: 220px; padding: 0 8px; white-space: nowrap;">Schedule an Appointment</a>
 
 <br />
 <br />
 
-<a asp-action="Index" asp-controller="HealthCareTeams" asp-route-patientId="@Model.Patient.Id" class="waves-effect waves-light btn btn-primary" style="width: 200px;">View All</a>
+<a asp-action="Index" asp-controller="HealthCareTeams" asp-route-patientId="@Model.Patient.Id" class="waves-effect waves-light btn btn-primary" style="width: auto; padding: 0 20px; white-space: nowrap;">View All</a>
 
 <div class="row">
     <div class="col s12 m4 l4">

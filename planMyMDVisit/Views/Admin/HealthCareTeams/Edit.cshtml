@@ -1,9 +1,9 @@
-﻿@model planMyMDVisit.Models.Domain.Patient
+﻿@*@model planMyMDVisit.Models.Domain.Patient*@
 
 <h4>Edit Care Team Information</h4>
 
-<form asp-controller="Admin" asp-action="EditHealthCareTeamInfo" method="post">
-    <h1>Hello Editing Patient HealthCare Stuff!!</h1>
+@*<form asp-controller="Admin" asp-action="EditHealthCareTeamInfo" method="post">
+    <h1>Hello Editing Patient HealthCare Stuff!!</h1>*@
 
    @*  @foreach (var hct in Model)
     {
@@ -36,11 +36,11 @@
         </div> *@
     @* } *@
 
-     <div>
+     @* <div>
         <button type="submit" class="waves-effect waves-light btn">Update Care Team</button>
     </div>
 </form>
-
+ *@
 <a class="btn btn-primary" 
     asp-controller="Admin" 
     asp-action="Patient" 

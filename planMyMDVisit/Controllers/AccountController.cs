@@ -62,12 +62,32 @@ namespace planMyMDVisit.Controllers
                         await dbContext.SaveChangesAsync();
                     }
 
+                    else if (registerViewModel.DoctorOrPatient.ToLower() == "doctor")
+                    {
+                        var doctor = new Doctor
+                        {
+                            Id = Guid.NewGuid(),
+                            UserId = user.Id,
+                            Specialty = registerViewModel.Specialty ?? "General Practice"
+                        };
+                        var dbContext = HttpContext.RequestServices.GetRequiredService<PlanMyMDVisitContext>();
+                        dbContext.Doctors.Add(doctor);
+                        await dbContext.SaveChangesAsync();
+                    }
+
                     //if (roleIdentityResult.Succeeded)
                     //{
-                        //return RedirectToAction("Register");
-                        await signInManager.SignInAsync(user, isPersistent: false);
+                    //return RedirectToAction("Register");
+                    await signInManager.SignInAsync(user, isPersistent: false);
 
-                        return RedirectToAction("Show", "Patients");
+                        if (registerViewModel.DoctorOrPatient.ToLower() == "doctor")
+                        {
+                            return RedirectToAction("Dashboard", "Doctors"); // doctors go here
+                        }
+                        else
+                        {
+                            return RedirectToAction("Show", "Patients"); // patients go here
+                        }
                     //}
                 }
                 else
@@ -112,7 +132,7 @@ namespace planMyMDVisit.Controllers
 
             if (await userManager.IsInRoleAsync(user, "Admin"))
             {
-                return RedirectToAction("Show", "Admin");
+                return RedirectToAction("Index", "Admin");
             }
 
             if (user == null)

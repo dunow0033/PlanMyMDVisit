@@ -83,6 +83,42 @@ namespace planMyMDVisit.Repositories
                 .FirstOrDefaultAsync(p => p.Id == patientId);
         }
 
+        public async Task<HealthCareTeam?> GetHealthCareTeamById(Guid id)
+        {
+            return await planMyMDVisitContext.HealthCareTeams
+                .Include(h => h.Doctor)
+                    .ThenInclude(d => d.User)
+                .Include(h => h.Patient)
+                .FirstOrDefaultAsync(h => h.Id == id);
+        }
+
+        public async Task<HealthCareTeam?> UpdateHealthCareTeam(HealthCareTeam healthCareTeam)
+        {
+            var existing = await planMyMDVisitContext.HealthCareTeams
+                .FirstOrDefaultAsync(h => h.Id == healthCareTeam.Id);
+
+            if (existing == null) return null;
+
+            existing.Specialty = healthCareTeam.Specialty;
+            existing.Appointment = healthCareTeam.Appointment;
+            existing.DoctorId = healthCareTeam.DoctorId;
+
+            await planMyMDVisitContext.SaveChangesAsync();
+            return existing;
+        }
+
+        public async Task<bool> DeleteHealthCareTeam(Guid id)
+        {
+            var healthCareTeam = await planMyMDVisitContext.HealthCareTeams
+                .FirstOrDefaultAsync(h => h.Id == id);
+
+            if (healthCareTeam == null) return false;
+
+            planMyMDVisitContext.HealthCareTeams.Remove(healthCareTeam);
+            await planMyMDVisitContext.SaveChangesAsync();
+            return true;
+        }
+
         //public async Task<CreateApptRequest> CreateApptAsync(CreateApptRequest createApptRequest)
         //{
         //    await planMyMDVisitContext.HealthCareTeams.AddAsync(createApptRequest);

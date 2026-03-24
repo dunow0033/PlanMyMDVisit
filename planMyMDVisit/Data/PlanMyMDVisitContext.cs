@@ -234,6 +234,15 @@ namespace planMyMDVisit.Data
                     UserId = Guid.Parse("A0CAB2C3-6558-4A1C-BE81-DFB39180DA3D"),  // admin user ID
                     RoleId = Guid.Parse("A0CAB2C3-6558-4A1C-BE81-DFB39180DA3D")
                 });
+
+            modelBuilder.Entity<Patient>()
+                .Property(p => p.CreatedAt)
+                .HasDefaultValueSql("SYSUTCDATETIME()");
+
+            modelBuilder.Entity<Patient>()
+                .Property(p => p.UpdatedAt)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("SYSUTCDATETIME()");
         }
     }
 }

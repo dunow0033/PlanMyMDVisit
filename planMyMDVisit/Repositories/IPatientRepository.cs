@@ -16,6 +16,8 @@ namespace planMyMDVisit.Repositories
 
         Task<Patient> GetPatientById(Guid id);
 
+        Task<Patient> GetPatientByPatientId(Guid patientId);
+
         Task<Patient?> UpdateAsync(Guid id, EditUserViewModel editUserViewModel, string? NewPassword);
 
         Task<Patient?> DeleteAsync(Guid patientId);

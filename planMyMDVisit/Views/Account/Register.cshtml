@@ -26,11 +26,46 @@
 					<span class="text-danger" asp-validation-for="UserName"></span>
 				</div>
 
-				<label for="DoctorOrPatient">Doctor</label>
-				<input class="form-check-input" type="radio" asp-for="DoctorOrPatient" name="DoctorOrPatient" value="Doctor" />
+				<div class="mb-3">
+					<label class="form-label d-block">Account Type</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="doctorRadio"
+							   asp-for="DoctorOrPatient" value="Doctor"
+							   onclick="document.getElementById('specialtySection').style.display='block'" />
+						<label class="form-check-label" for="doctorRadio">Doctor</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="patientRadio"
+							   asp-for="DoctorOrPatient" value="Patient"
+							   onclick="document.getElementById('specialtySection').style.display='none'" />
+						<label class="form-check-label" for="patientRadio">Patient</label>
+					</div>
+					<span class="text-danger d-block" asp-validation-for="DoctorOrPatient"></span>
+				</div>
 
-				<label for="DoctorOrPatient">Patient</label>
-				<input class="form-check-input" type="radio" asp-for="DoctorOrPatient" name="DoctorOrPatient" value="Patient" />
+				<!-- Specialty section, hidden by default -->
+				<div id="specialtySection" style="display: none; margin-bottom: 1rem;
+					background: #f8f9fa; padding: 16px; border-radius: 8px; border: 1px solid #dee2e6;">
+					<label class="form-label d-block" style="font-weight: 600; margin-bottom: 10px;">
+						Select Specialty
+					</label>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" id="dermatologist"
+							   name="Specialty" value="Dermatologist" />
+						<label class="form-check-label" for="dermatologist">Dermatologist</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" id="dentist"
+							   name="Specialty" value="Dentist" />
+						<label class="form-check-label" for="dentist">Dentist</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" id="optometrist"
+							   name="Specialty" value="Optometrist" />
+						<label class="form-check-label" for="optometrist">Optometrist</label>
+					</div>
+					<span class="text-danger" asp-validation-for="Specialty"></span>
+				</div>
 
 				<div class="mb-3">
 					<label class="form-label">Email</label>

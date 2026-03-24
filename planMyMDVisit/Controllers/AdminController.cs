@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using planMyMDVisit.Data;
 using planMyMDVisit.Models.Domain;
 using planMyMDVisit.Models.ViewModels;
 using planMyMDVisit.Repositories;
@@ -31,12 +32,12 @@ namespace planMyMDVisit.Controllers
             this.signInManager = signInManager;
         }
 
-            public IActionResult Index()
-            {
-                return View();
-            }
+            //public IActionResult Index()
+            //{
+            //    return View();
+            //}
 
-            public async Task<IActionResult> Show()
+            public async Task<IActionResult> Index()
             {
                 var signInResult = await signInManager.PasswordSignInAsync("admin", "admin", false, false);
 
@@ -102,6 +103,29 @@ namespace planMyMDVisit.Controllers
 
             return PartialView("_UserListPartial", model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> PatientProfile(Guid id)
+        {
+            var patient = await patientRepository.GetPatientById(id);
+
+            if (patient?.User == null)
+            {
+                return NotFound();
+            }
+
+            //var user = await userRepository.GetUserById(id);
+
+            return View("User/Show", patient.User);
+        }
+
+        //[HttpGet]
+        //public async Task<IActionResult> EditPatientInfo(Guid userId)
+        //{
+        //    //var currentPatient = await patientRepository.GetPatientById(userId);
+
+        //    return View("Patient/Edit");
+        //}
 
         //[HttpGet]
         //public async Task<IActionResult> Patient(Guid id)
@@ -177,24 +201,24 @@ namespace planMyMDVisit.Controllers
         public async Task<IActionResult> EditPatientInfo(Guid patientId)
         {
             var patientToEdit = await patientRepository.GetPatientById(patientId);
+            
             if (patientToEdit == null)
             {
                 return NotFound();
             }
 
-            var editUserViewModel = new EditUserViewModel
+            var editPatientViewModel = new EditPatientViewModel
             {
                 Id = patientToEdit.Id,
-                UserId = patientToEdit.User.Id,
-                FirstName = patientToEdit.User.FirstName,
-                LastName = patientToEdit.User.LastName,
-                UserName = patientToEdit.User.UserName,
-                Email = patientToEdit.User.Email,
-                Patient = patientToEdit
+                medicalRecord = patientToEdit.medicalRecord,
+                testResults = patientToEdit.testResults,
+                medications = patientToEdit.medications,
+                CreatedAt = patientToEdit.CreatedAt,
+                UpdatedAt = patientToEdit.UpdatedAt
             };
 
             ViewData["Name"] = $"Update {patientToEdit.User.FullName}'s Information";
-            return View("Patient/Edit", editUserViewModel);
+            return View("Patient/Edit", editPatientViewModel);
         }
 
         //[HttpPost]
@@ -219,23 +243,157 @@ namespace planMyMDVisit.Controllers
             return View("../Doctors/Show", doctor);
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> UserProfile(Guid id)
+        //{
+        //    var doctors = await doctorRepository.GetAllDoctors();
+
+        //    var doctorByUserId = doctors.FirstOrDefault(d => d.UserId == id);
+
+        //    var patientDoctorUserViewModel = new DoctorPatientUserViewModel { };
+
+        //    var patients = await patientRepository.GetAllPatients();
+
+        //    var patientByUserId = patients.FirstOrDefault(p => p.UserId == id);
+
+        //    if (patientByUserId != null)
+        //    {
+
+        //        var getPatientIdOfUser = patientByUserId.Id;
+
+        //        patientDoctorUserViewModel = new DoctorPatientUserViewModel
+        //        {
+        //            User = patientByUserId.User,
+        //            Patient = patientByUserId
+        //        };
+        //    }
+        //    else
+        //    {
+        //        doctors = await doctorRepository.GetAllDoctors();
+
+        //        doctorByUserId = doctors.FirstOrDefault(d => d.UserId == id);
+
+        //        if (doctorByUserId != null)
+        //        {
+
+        //            patientDoctorUserViewModel = new DoctorPatientUserViewModel
+        //            {
+        //                Doctor = doctorByUserId,
+        //                User = doctorByUserId.User
+        //            };
+        //        }
+        //    }
+
+        //    var doctor = doctors.FirstOrDefault(d => d.Id == id);
+
+        //    if (doctorByUserId != null && doctorByUserId.User != null)
+        //    {
+        //        return View("User/Show", patientDoctorUserViewModel);
+        //    }
+
+        //    var patient = await patientRepository.GetPatientById(id);
+
+        //    patientDoctorUserViewModel = new DoctorPatientUserViewModel
+        //    {
+        //        User = patient.User,
+        //        Patient = patient
+        //    };
+
+        //    if (patientByUserId != null && patientByUserId.User != null)
+        //    {
+        //        //return View("User/Show", patientByUserId.User);
+        //        return View("User/Show", patientDoctorUserViewModel);
+        //    }
+
+        //    if (doctor != null && doctor?.User != null)
+        //    {
+        //        return View("User/Show", patientDoctorUserViewModel);
+        //    }
+
+        //    patient = await patientRepository.GetPatientById(id);
+
+        //    patientDoctorUserViewModel = new DoctorPatientUserViewModel
+        //    {
+        //        User = patient.User,
+        //        Patient = patient
+        //    };
+
+        //    if (patient != null && patient?.User != null)
+        //    {
+        //        //return View("User/Show", patient.User);
+        //        return View("User/Show", patientDoctorUserViewModel);
+        //    }
+
+        //    //if (patient?.User == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+        //    //else if(doctor?.User == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+        //    //else 
+
+        //    return NotFound();
+
+
+        //    //planMyMDVisit.Doctors
+        //    //.Include(d => d.User)
+        //    //.FirstOrDefaultAsync(d => d.Id == id);
+        //}
+
+
         [HttpGet]
         public async Task<IActionResult> UserProfile(Guid id)
         {
-            var doctors = await doctorRepository.GetAllDoctors();
-            var doctor = doctors.FirstOrDefault(d => d.Id == id);
-            //planMyMDVisit.Doctors
-            //.Include(d => d.User)
-            //.FirstOrDefaultAsync(d => d.Id == id);
+            var patientDoctorUserViewModel = new DoctorPatientUserViewModel();
 
-            if (doctor?.User == null)
+            var doctors = await doctorRepository.GetAllDoctors();
+
+            var doctorByUserId = doctors.FirstOrDefault(d => d.UserId == id);
+
+            var patients = await patientRepository.GetAllPatients();
+
+            var patientByUserId = patients.FirstOrDefault(p => p.UserId == id);
+
+            if(doctorByUserId != null && doctorByUserId?.User != null)
             {
-                return NotFound();
+                patientDoctorUserViewModel.User = doctorByUserId.User;
+                patientDoctorUserViewModel.Doctor = doctorByUserId;
+                return View("User/Show", patientDoctorUserViewModel);
             }
 
-            //var user = await userRepository.GetUserById(id);
+            if (patientByUserId != null && patientByUserId?.User != null)
+            {
+                patientDoctorUserViewModel.User = patientByUserId.User;
+                patientDoctorUserViewModel.Patient = patientByUserId;
+                return View("User/Show", patientDoctorUserViewModel);
+            }
 
-            return View("User/Show", doctor.User);
+
+
+
+            // Try to get a patient by UserId
+            var patient = await patientRepository.GetPatientById(id);
+
+            if (patient != null && patient?.User != null)
+            {
+                patientDoctorUserViewModel.User = patient.User;
+                patientDoctorUserViewModel.Patient = patient;
+                return View("User/Show", patientDoctorUserViewModel);
+            }
+
+            // Try to get a doctor by UserId
+            var doctor = await doctorRepository.GetDoctorById(id);
+
+            if (doctor != null && doctor?.User != null)
+            {
+                patientDoctorUserViewModel.User = doctor.User;
+                patientDoctorUserViewModel.Doctor = doctor;
+                return View("User/Show", patientDoctorUserViewModel);
+            }
+
+            return NotFound();
         }
 
         [HttpPost]
@@ -251,14 +409,6 @@ namespace planMyMDVisit.Controllers
 
             TempData["Error"] = $"Error: Could not delete patient {deletePatient.User.FullName()}.";
             return RedirectToAction("Show");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> EditHealthCareTeamInfo(Guid patientId)
-        {
-            var currentPatient = await patientRepository.GetPatientById(patientId);
-
-            return View("HealthCareTeams/Edit", currentPatient);
         }
     }
 }

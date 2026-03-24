@@ -5,6 +5,7 @@ using planMyMDVisit.Data;
 using planMyMDVisit.Models.Domain;
 using planMyMDVisit.Models.ViewModels;
 using planMyMDVisit.Repositories;
+using System.Security.Claims;
 
 namespace planMyMDVisit.Controllers
 {
@@ -54,6 +55,29 @@ namespace planMyMDVisit.Controllers
             };
 
             return View(doctorViewModel);
+        }
+
+        [HttpGet("Doctors/Dashboard")]
+        public async Task<IActionResult> Dashboard()
+        {
+            var httpContext = HttpContext;
+            var userIdString = httpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrWhiteSpace(userIdString) || !Guid.TryParse(userIdString, out var userId))
+            {
+                return NotFound("Doctor not found.");
+            }
+
+            var doctor = await context.Doctors
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(d => d.UserId == userId);
+
+            if (doctor == null)
+            {
+                return NotFound("Doctor not found.");
+            }
+
+            return View(doctor);
         }
 
         [HttpGet]

@@ -1,0 +1,8 @@
+﻿@model planMyMDVisit.Models.Domain.Doctor
+
+<h4>Welcome, @Model.User.FirstName!</h4>
+<p>Specialty: @Model.Specialty</p>
+
+<a asp-action="Index" asp-controller="Doctors" class="btn btn-primary">
+    View All Doctors
+</a>

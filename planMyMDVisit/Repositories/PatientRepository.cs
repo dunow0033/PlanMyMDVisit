@@ -126,13 +126,27 @@ namespace planMyMDVisit.Repositories
                 .ToListAsync();
         }
 
+        //public async Task<Patient> GetPatientById(Guid id)
+        //{
+        //    return await planMyMDVisitDBContext.Patients
+        //        .Include(p => p.User)
+        //        .Where(p => p.UserId == id).FirstOrDefaultAsync();
+        //}
+
         public async Task<Patient> GetPatientById(Guid id)
         {
             return await planMyMDVisitDBContext.Patients
                 .Include(p => p.User)
-                .Where(p => p.Id == id).FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
-        
+
+        public async Task<Patient> GetPatientByPatientId(Guid patientId)
+        {
+            return await planMyMDVisitDBContext.Patients
+                .Include(p => p.User)
+                .Where(p => p.Id == patientId).FirstOrDefaultAsync();
+        }
+
         public async Task<Patient?> UpdateAsync(Guid patientId, EditUserViewModel eVM, string? NewPassword)
         {
             var existingPatient = await planMyMDVisitDBContext.Patients

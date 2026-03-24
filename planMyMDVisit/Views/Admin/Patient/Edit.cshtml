@@ -1,36 +1,44 @@
-﻿<h4>Edit Patient Information </h4>
+﻿@model planMyMDVisit.Models.ViewModels.EditPatientViewModel
+
+<h4>Edit Patient Information </h4>
 
 <form asp-controller="Admin" asp-action="EditPatientInfo" method="post" class="form-control">
 
-   @*  <input type="hidden" asp-for="Id" />
+   <input type="hidden" asp-for="Id" />
 
     <div>
-        <label for="lastName">First Name</label>
-        <input type="text" asp-for="FirstName" class="form-control" />
+        <label for="medicalRecord">Medical Record</label>
+        <input type="text" asp-for="medicalRecord" class="form-control" />
     </div>
 
     <div>
-        <label for="lastName">Last Name</label>
-        <input type="text" asp-for="LastName" class="form-control" />
+        <label for="testResults">Test Results</label>
+        <input type="text" asp-for="testResults" class="form-control" />
     </div>
 
     <div>
-        <label for="userName">Username</label>
-        <input type="text" asp-for="UserName" class="form-control" />
+        <label for="medications">Medications</label>
+        <input type="text" asp-for="medications" class="form-control" />
     </div>
+
+    <br />
+    <br />
+    Patient Information was created at @Html.DisplayFor(m => m.CreatedAt)<br>
+    Patient Information was updated at @Html.DisplayFor(m => m.UpdatedAt)<br>
+    <br />
+    <br />
 
     <div>
-        <label for="email">Email</label>
-        <input type="text" asp-for="Email" class="form-control" />
+        <button type="submit" class="btn btn-primary">Update Patient Information</button>
     </div>
+</form>
 
 
 
 
 
 
-
-<div>
+@* <div>
     <%= f.label :medical_record, "Medical and Surgical Histories" %>
     <%= f.text_area :medical_record %>
 </div>
@@ -54,9 +62,9 @@
 
 <div>
     <%= f.submit "Update Patient Information", class: "waves-effect waves-light btn" %>
-</div> *@
+</div>
 
    <div>
     <button type="submit" class="btn btn-primary">Update</button>
     </div>
-</form>
+ *@

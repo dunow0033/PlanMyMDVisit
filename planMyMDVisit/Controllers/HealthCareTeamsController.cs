@@ -213,6 +213,70 @@ namespace planMyMDVisit.Controllers
             return View(appt);
         }
 
+        [HttpGet("Edit/{id}")]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var hct = await healthCareTeamRepository.GetHealthCareTeamById(id);
+
+            if (hct == null) return NotFound();
+
+            var specialties = await doctorRepository.GetSpecialties();
+
+            var model = new CreateApptRequest
+            {
+                Id = id,
+                Specialty = hct.Specialty,
+                Appointment = hct.Appointment,
+                DoctorId = hct.DoctorId,
+                SpecialtySelectList = specialties
+                    .Distinct()
+                    .OrderBy(s => s)
+                    .Select(s => new SelectListItem { Text = s, Value = s })
+                    .ToList()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost("Edit/{id}")]
+        public async Task<IActionResult> Edit(Guid id, CreateApptRequest request)
+        {
+            var hct = new HealthCareTeam
+            {
+                Id = id,
+                Specialty = request.Specialty,
+                Appointment = request.Appointment,
+                DoctorId = request.DoctorId
+            };
+
+            var updated = await healthCareTeamRepository.UpdateHealthCareTeam(hct);
+
+            if (updated == null) return NotFound();
+
+            return RedirectToAction("Show", "Patients");
+        }
+
+        [HttpGet("Delete/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var hct = await healthCareTeamRepository.GetHealthCareTeamById(id);
+
+            if (hct == null) return NotFound();
+
+            return View(hct);
+        }
+
+        [HttpPost("Delete/{id}")]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            var result = await healthCareTeamRepository.DeleteHealthCareTeam(id);
+
+            if (!result) return NotFound();
+
+            return RedirectToAction("Show", "Patients");
+        }
+
         //[HttpPost]
         //[ActionName("ConfirmAppt2")]
         //public async Task<IActionResult> ConfirmAppt2(CreateApptRequest createApptRequest)

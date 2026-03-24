@@ -13,6 +13,8 @@ public class RegisterViewModel
     [Required]
     public string Lastname { get; set; }
 
+    public string? Specialty { get; set; }
+
     [Required]
     [Display(Name = "Role")]
     public string DoctorOrPatient { get; set; }

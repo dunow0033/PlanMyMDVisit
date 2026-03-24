@@ -14,5 +14,9 @@ namespace planMyMDVisit.Repositories
 
         Task<HealthCareTeam[]> ReturnPatientApptListAsync(Guid patientID);
         //Task<CreateApptRequest> CreateApptAsync(CreateApptRequest createApptRequest);
+
+        Task<HealthCareTeam?> GetHealthCareTeamById(Guid id);
+        Task<HealthCareTeam?> UpdateHealthCareTeam(HealthCareTeam healthCareTeam);
+        Task<bool> DeleteHealthCareTeam(Guid id);
     }
 }
